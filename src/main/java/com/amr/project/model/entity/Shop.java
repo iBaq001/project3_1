@@ -82,11 +82,7 @@ public class Shop implements Serializable {
     private List<Review> reviews;
 
 
-    @OneToOne(mappedBy = "shop", cascade = {CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH,
-            CascadeType.DETACH},
-            fetch = FetchType.LAZY, optional = false)
+    @OneToOne(cascade = CascadeType.ALL)
     @ToString.Exclude
     private Image logo;
 
@@ -148,6 +144,15 @@ public class Shop implements Serializable {
     private boolean isModerateAccept;
     private String moderatedRejectReason;
     private boolean isPretendedToBeDeleted;
+
+    public Shop(String name, String email, String phone, double rating, String description) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.rating = rating;
+        this.description = description;
+
+    }
 
     public boolean isPretendedToBeDeleted() {
         return isPretendedToBeDeleted;

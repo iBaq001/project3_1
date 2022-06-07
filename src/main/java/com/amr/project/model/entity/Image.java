@@ -9,15 +9,12 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLConnection;
 import java.util.Objects;
 
 //Картинки будем хранить в БД (для удобства, хотя это и плохая практика)
@@ -36,16 +33,33 @@ public class Image {
     private Long id;
 
     @Lob
-    @Column (columnDefinition = "longblob")
+    @Column(columnDefinition = "longblob")
     private byte[] picture;
+
+    private String mimeType;
 
     private Boolean isMain;
 
+    public Image(File file) {
+        this();
+        this.saveFileAsImage(file);
+    }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shop_id")
-    @ToString.Exclude
-    private Shop shop;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /*Метод вызывается для объекта Image и сохраняет в нём картинку, переданную в качестве аргумента как объект класса File*/
+    public void saveFileAsImage(File file) {
+        try (InputStream inputStream = new FileInputStream(file)) {
+            this.setPicture(inputStream.readAllBytes());
+            this.setMimeType(URLConnection.guessContentTypeFromName(file.getName()));
+            System.out.println("Файл успешно загружен, MIME-тип: " + this.getMimeType());
+        } catch (IOException e) {
+            System.out.println("Ошибка чтения изображения: " + e);
+        }
+
+    }
 
     @Override
     public boolean equals(Object o) {

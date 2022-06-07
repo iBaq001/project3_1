@@ -79,6 +79,11 @@ public class Order {
     @ToString.Exclude
     private Address address;
 
+    public Order(Calendar orderDate, List<Item> itemsInOrder) {
+        this.orderDate = orderDate;
+        this.itemsInOrder = itemsInOrder;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

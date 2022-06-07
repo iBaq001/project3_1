@@ -1,0 +1,28 @@
+.custom-navbar {
+    /*width:960px !important;*/
+    min-width: 10%;
+    max-width: 1280px
+}
+
+.showcase {
+    height: 500px;
+}
+
+.showcase a:link, .showcase a:visited, .showcase a:active {
+    text-decoration: none;
+    color: black;
+}
+.showcase a:hover {
+    text-decoration: none;
+    color: blue;
+}
+
+
+.showcase-img {
+    max-height: 300px;
+}
+
+.rating-star {
+    color: gold;
+}
+

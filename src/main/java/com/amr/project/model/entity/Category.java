@@ -49,6 +49,10 @@ public class Category {
     @ToString.Exclude
     private List<Item> items;
 
+    public Category(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

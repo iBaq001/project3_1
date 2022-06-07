@@ -67,6 +67,12 @@ public class Review {
     private boolean isModerateAccept;
     private String moderatedRejectReason;
 
+    public Review(String text, int rating, Shop shop) {
+        this.text = text;
+        this.rating = rating;
+        this.shop = shop;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

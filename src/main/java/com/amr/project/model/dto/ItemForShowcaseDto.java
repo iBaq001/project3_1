@@ -1,6 +1,5 @@
 package com.amr.project.model.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
@@ -8,14 +7,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id", scope = Long.class)
-public class ImageDto {
+public class ItemForShowcaseDto {
     private Long id;
-    private String imageInBase64WithMimetypePrefix;
-    private Boolean isMain;
+    private String name;
+    private BigDecimal basePrice;
+    private BigDecimal price;
+    private int count;
+    private ImageDto imageDto;
+    private ShopDto shopDto;
+    private double rating;
+    private List ratingFilledStars;
+    private List ratingEmptyStars;
 }

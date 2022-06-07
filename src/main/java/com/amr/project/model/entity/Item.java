@@ -130,6 +130,16 @@ public class Item {
     private String moderatedRejectReason;
     private boolean isPretendedToBeDeleted;
 
+    public Item (String name, BigDecimal price, int count, double rating, String description, Category category, Shop shop) {
+        this.name = name;
+        this.price = price;
+        this.count = count;
+        this.rating = rating;
+        this.description = description;
+        this.category = category;
+        this.shop = shop;
+    }
+
 
     public boolean isPretendedToBeDeleted() {
         return isPretendedToBeDeleted;

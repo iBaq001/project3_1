@@ -5,7 +5,7 @@ import com.amr.project.model.entity.Shop;
 
 import java.util.List;
 
-public interface ShopDao {
+public interface ShopDao extends ReadWriteDao<Shop, Long> {
 
     public Shop findById(Long id);
 
@@ -17,6 +17,5 @@ public interface ShopDao {
 
     Shop findShopByName(String name);
 
-    void save(Shop shop);
 
 }

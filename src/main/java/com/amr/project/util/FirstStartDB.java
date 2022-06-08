@@ -1,17 +1,15 @@
 package com.amr.project.util;
 
+import com.amr.project.converter.ImagesToByteArrayConverter;
+import com.amr.project.dao.impl.FirstStartDBDao;
 import com.amr.project.model.entity.*;
 import com.amr.project.model.enums.Gender;
 import com.amr.project.model.enums.PersonalDataStatus;
 import com.amr.project.model.enums.Roles;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
@@ -116,6 +114,7 @@ public class FirstStartDB {
 
         Image moderator1image1 = Image.builder()
                 .picture(imagesToByteArrayConverter.getBiteArrayImage("moderator1.jpeg"))
+                .mimeType(imagesToByteArrayConverter.getMimeTypeFromImage("moderator1.jpeg"))
                 .isMain(true)
                 .build();
         List<Image> moderator1Images = new ArrayList<>();
@@ -157,6 +156,7 @@ public class FirstStartDB {
 
         Image admin1image1 = Image.builder()
                 .picture(imagesToByteArrayConverter.getBiteArrayImage("admin1.jpeg"))
+                .mimeType(imagesToByteArrayConverter.getMimeTypeFromImage("admin1.jpeg"))
                 .isMain(true)
                 .build();
         List<Image> admin1Images = new ArrayList<>();
@@ -206,6 +206,7 @@ public class FirstStartDB {
 
         Image shop1Logo = Image.builder()
                 .picture(imagesToByteArrayConverter.getBiteArrayImage("shop1.jpeg"))
+                .mimeType(imagesToByteArrayConverter.getMimeTypeFromImage("shop1.jpeg"))
                 .isMain(true)
                 .build();
 
@@ -225,19 +226,17 @@ public class FirstStartDB {
                 .rating(9.9)
                 .build();
 
-        shop1Logo.setShop(shop1);
-
         CartItem cartItem1 = CartItem.builder()
                 .quantity(1000)
                 .user(admin1)
                 .shop(shop1)
                 .build();
 
-        CartItem cartItem3 = CartItem.builder()
-                .quantity(1000)
-                .user(admin1)
-                .shop(shop1)
-                .build();
+//        CartItem cartItem3 = CartItem.builder()
+//                .quantity(1000)
+//                .user(admin3)
+//                .shop(shop1)
+//                .build();
 
         Category category1 = Category.builder()
                 .name("Beer")
@@ -249,8 +248,8 @@ public class FirstStartDB {
 
         Image item1image1 = Image.builder()
                 .picture(imagesToByteArrayConverter.getBiteArrayImage("item1.jpeg"))
+                .mimeType(imagesToByteArrayConverter.getMimeTypeFromImage("item1.jpeg"))
                 .isMain(true)
-                .shop(shop1)
                 .build();
         List<Image> item1Images = new ArrayList<>();
         item1Images.add(item1image1);
@@ -275,8 +274,8 @@ public class FirstStartDB {
 
         Image item3image1 = Image.builder()
                 .picture(imagesToByteArrayConverter.getBiteArrayImage("item3.jpeg"))
+                .mimeType(imagesToByteArrayConverter.getMimeTypeFromImage("item3.jpeg"))
                 .isMain(true)
-                .shop(shop1)
                 .build();
         List<Image> item3Images = new ArrayList<>();
         item3Images.add(item3image1);
@@ -292,7 +291,7 @@ public class FirstStartDB {
                 .name("Сидрoff")
                 .price(BigDecimal.valueOf(85L))
                 .rating(9.5)
-                .cartItem(cartItem3)
+                .cartItem(cartItem1)
                 .category(category3)
                 .shop(shop1)
                 .user(admin1)
@@ -316,6 +315,7 @@ public class FirstStartDB {
 
         Image admin2image1 = Image.builder()
                 .picture(imagesToByteArrayConverter.getBiteArrayImage("admin2.jpeg"))
+                .mimeType(imagesToByteArrayConverter.getMimeTypeFromImage("admin2.jpeg"))
                 .isMain(true)
                 .build();
         List<Image> admin2Images = new ArrayList<>();
@@ -365,6 +365,7 @@ public class FirstStartDB {
 
         Image shop2Logo = Image.builder()
                 .picture(imagesToByteArrayConverter.getBiteArrayImage("shop2.jpeg"))
+                .mimeType(imagesToByteArrayConverter.getMimeTypeFromImage("shop2.jpeg"))
                 .isMain(true)
                 .build();
 
@@ -384,8 +385,6 @@ public class FirstStartDB {
                 .logo(shop2Logo)
                 .build();
 
-        shop2Logo.setShop(shop2);
-
         CartItem cartItem2 = CartItem.builder()
                 .quantity(2000)
                 .user(admin2)
@@ -398,8 +397,8 @@ public class FirstStartDB {
 
         Image item2image1 = Image.builder()
                 .picture(imagesToByteArrayConverter.getBiteArrayImage("item2.jpeg"))
+                .mimeType(imagesToByteArrayConverter.getMimeTypeFromImage("item2.jpeg"))
                 .isMain(true)
-                .shop(shop2)
                 .build();
         List<Image> item2Images = new ArrayList<>();
         item2Images.add(item2image1);
@@ -429,11 +428,11 @@ public class FirstStartDB {
                 .shop(shop2)
                 .build();
 
-        CartItem cartItem4 = CartItem.builder()
-                .quantity(2000)
-                .user(admin2)
-                .shop(shop2)
-                .build();
+//        CartItem cartItem4 = CartItem.builder()
+//                .quantity(2000)
+//                .user(admin2)
+//                .shop(shop2)
+//                .build();
 
         Category category4 = Category.builder()
                 .name("SeaFoods")
@@ -441,8 +440,8 @@ public class FirstStartDB {
 
         Image item4image1 = Image.builder()
                 .picture(imagesToByteArrayConverter.getBiteArrayImage("item4.jpeg"))
+                .mimeType(imagesToByteArrayConverter.getMimeTypeFromImage("item4.jpeg"))
                 .isMain(true)
-                .shop(shop2)
                 .build();
         List<Image> item4Images = new ArrayList<>();
         item4Images.add(item4image1);
@@ -458,7 +457,7 @@ public class FirstStartDB {
                 .name("Кальмары сушеные")
                 .price(BigDecimal.valueOf(85L))
                 .rating(8.5)
-                .cartItem(cartItem4)
+//                .cartItem(cartItem4)
                 .category(category4)
                 .shop(shop2)
                 .user(admin2)
@@ -483,6 +482,7 @@ public class FirstStartDB {
 
         Image user1image1 = Image.builder()
                 .picture(imagesToByteArrayConverter.getBiteArrayImage("user1.jpeg"))
+                .mimeType(imagesToByteArrayConverter.getMimeTypeFromImage("user1.jpeg"))
                 .isMain(true)
                 .build();
         List<Image> user1Images = new ArrayList<>();
@@ -537,6 +537,7 @@ public class FirstStartDB {
 
         Image user2image1 = Image.builder()
                 .picture(imagesToByteArrayConverter.getBiteArrayImage("user2.jpeg"))
+                .mimeType(imagesToByteArrayConverter.getMimeTypeFromImage("user2.jpeg"))
                 .isMain(true)
                 .build();
         List<Image> user2Images = new ArrayList<>();
@@ -583,6 +584,7 @@ public class FirstStartDB {
 
         Image user3image1 = Image.builder()
                 .picture(imagesToByteArrayConverter.getBiteArrayImage("user3.jpeg"))
+                .mimeType(imagesToByteArrayConverter.getMimeTypeFromImage("user3.jpeg"))
                 .isMain(true)
                 .build();
         List<Image> user3Images = new ArrayList<>();
@@ -646,7 +648,7 @@ public class FirstStartDB {
         firstStartDBDao.persist(cartItem1);
         firstStartDBDao.persist(category1);
         firstStartDBDao.persist(item1);
-        firstStartDBDao.persist(cartItem3);
+//        firstStartDBDao.persist(cartItem3);
         firstStartDBDao.persist(category3);
         firstStartDBDao.persist(item3);
 
@@ -656,7 +658,7 @@ public class FirstStartDB {
         firstStartDBDao.persist(cartItem2);
         firstStartDBDao.persist(category2);
         firstStartDBDao.persist(item2);
-        firstStartDBDao.persist(cartItem4);
+//        firstStartDBDao.persist(cartItem4);
         firstStartDBDao.persist(category4);
         firstStartDBDao.persist(item4);
 
@@ -674,15 +676,3 @@ public class FirstStartDB {
     }
 }
 
-@Repository
-class FirstStartDBDao<T> {
-
-    @PersistenceContext
-    EntityManager emStart;
-
-    @Transactional
-    public void persist(T entity) {
-        emStart.persist(entity);
-    }
-
-}

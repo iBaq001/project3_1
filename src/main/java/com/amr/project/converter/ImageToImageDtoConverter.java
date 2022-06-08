@@ -32,7 +32,7 @@ public class ImageToImageDtoConverter {
     /*Метод возвращает картинку с надписью No logo*/
     private static ImageDto returnPictureWithNoLogo() {
         if(noPicImageDto == null) {
-            File file1 = new File("src/main/resources/pictures/No-logo.png");
+            File file1 = new File("src/main/resources/static/images/No-logo.png");
             Image image1 = new Image(file1);
             image1.setIsMain(true);
             noPicImageDto = convertImageToImageDto(image1);

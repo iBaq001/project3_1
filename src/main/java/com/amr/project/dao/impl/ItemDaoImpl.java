@@ -10,10 +10,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class ItemDaoImpl implements ItemDao {
-
-    @PersistenceContext
-    private EntityManager em;
+public class ItemDaoImpl extends ReadWriteDaoImpl<Item, Long> implements ItemDao {
 
     @Override
     public List<Item> getItemsByShopId(Long shopId) {

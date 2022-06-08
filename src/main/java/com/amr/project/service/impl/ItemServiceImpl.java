@@ -1,5 +1,6 @@
 package com.amr.project.service.impl;
 
+import com.amr.project.dao.abstracts.ItemDao;
 import com.amr.project.dao.abstracts.ReadWriteDao;
 import com.amr.project.exception.ResourceNotFoundException;
 import com.amr.project.mapper.ItemMapper;
@@ -19,14 +20,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
-    private final ReadWriteDao<Item, Long> readWriteDao;
+    private final ItemDao itemDao;
 
     private final ItemMapper itemMapper;
 
     @Transactional(readOnly = true)
     @Override
     public List<ItemDto> getAll() {
-        return readWriteDao.findAll().stream()
+        return itemDao.findAll().stream()
                 .map(itemMapper::itemToItemDto)
                 .collect(Collectors.toList());
     }
@@ -34,13 +35,13 @@ public class ItemServiceImpl implements ItemService {
     @Transactional
     @Override
     public void addItem(ItemDtoRequest itemDtoRequest) {
-        readWriteDao.persist(itemMapper.createItemDtoToItem(itemDtoRequest));
+        itemDao.persist(itemMapper.createItemDtoToItem(itemDtoRequest));
     }
 
     @Transactional
     @Override
     public void updateItem(Long itemId, ItemDtoRequest itemDtoRequest) {
-        Item updatingItem = readWriteDao.findById(itemId);
+        Item updatingItem = itemDao.findById(itemId);
         if (Objects.nonNull(updatingItem)) {
             updatingItem.setBasePrice(itemDtoRequest.getBasePrice());
             updatingItem.setCount(itemDtoRequest.getCount());
@@ -48,7 +49,7 @@ public class ItemServiceImpl implements ItemService {
             updatingItem.setPrice(itemDtoRequest.getPrice());
             updatingItem.setRating(itemDtoRequest.getRating());
             updatingItem.setDescription(itemDtoRequest.getDescription());
-            readWriteDao.persist(updatingItem);
+            itemDao.persist(updatingItem);
         } else {
             throw new ResourceNotFoundException(String.format("Resource with id: %d", itemId));
         }
@@ -57,9 +58,9 @@ public class ItemServiceImpl implements ItemService {
     @Transactional
     @Override
     public void deleteItem(Long itemId) {
-        Item deletingItem = readWriteDao.findById(itemId);
+        Item deletingItem = itemDao.findById(itemId);
         if (Objects.nonNull(deletingItem)) {
-            readWriteDao.delete(deletingItem);
+            itemDao.delete(deletingItem);
         } else {
             throw new ResourceNotFoundException(String.format("Resource with id: %d", itemId));
         }

@@ -5,7 +5,7 @@ import com.amr.project.model.entity.Review;
 
 import java.time.ZoneId;
 
-public class ReviewToReviewDto {
+public class ReviewToReviewDtoConverter {
 
     public static ReviewDto convertReviewToReviewDto(Review review) {
         return new ReviewDto(review.getId(),

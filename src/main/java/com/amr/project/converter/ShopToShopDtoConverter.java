@@ -17,7 +17,7 @@ public class ShopToShopDtoConverter {
                 shop.getPhone(),
                 shop.getRating(),
                 (shop.getReviews() == null) ? null : shop.getReviews().stream()
-                        .map(review -> ReviewToReviewDto.convertReviewToReviewDto(review))
+                        .map(review -> ReviewToReviewDtoConverter.convertReviewToReviewDto(review))
                         .collect(Collectors.toList()),
                 ImageToImageDtoConverter.convertImageToImageDto(shop.getLogo()),
                 (shop.getDiscounts() == null) ? null : shop.getDiscounts().stream()

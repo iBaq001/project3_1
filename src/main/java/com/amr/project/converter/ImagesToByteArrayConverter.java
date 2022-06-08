@@ -1,10 +1,11 @@
-package com.amr.project.util;
+package com.amr.project.converter;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLConnection;
 import java.nio.file.Files;
 
 @Component
@@ -16,4 +17,10 @@ private final String path = "classpath:static/images/";
         byte[] arrayImage = Files.readAllBytes(fileImage.toPath());
         return arrayImage;
     }
+
+    public String getMimeTypeFromImage (String name) throws IOException {
+        File fileImage = ResourceUtils.getFile(path + name);
+        return URLConnection.guessContentTypeFromName(fileImage.getName());
+    }
+
 }

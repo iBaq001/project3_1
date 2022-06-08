@@ -54,7 +54,6 @@ public class Image {
         try (InputStream inputStream = new FileInputStream(file)) {
             this.setPicture(inputStream.readAllBytes());
             this.setMimeType(URLConnection.guessContentTypeFromName(file.getName()));
-            System.out.println("Файл успешно загружен, MIME-тип: " + this.getMimeType());
         } catch (IOException e) {
             System.out.println("Ошибка чтения изображения: " + e);
         }

@@ -36,7 +36,7 @@ public class ShowcaseRestController {
     }
 
     @DeleteMapping("/shop/{id}")
-    public void deleteUser(@PathVariable("id") Long id) {
+    public void deleteShop(@PathVariable("id") Long id) {
         showcaseService.removeShopById(id);
     }
 

@@ -1,14 +1,13 @@
 package com.amr.project.service.impl;
 
 import com.amr.project.dao.abstracts.ItemDao;
-import com.amr.project.dao.abstracts.ReadWriteDao;
 import com.amr.project.exception.ResourceNotFoundException;
 import com.amr.project.mapper.ItemMapper;
 import com.amr.project.model.dto.ItemDtoRequest;
 import com.amr.project.model.dto.ItemDto;
 import com.amr.project.model.entity.Item;
 import com.amr.project.service.abstracts.ItemService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,12 +16,18 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
-public class ItemServiceImpl implements ItemService {
+public class ItemServiceImpl extends ReadWriteServiceImpl<Item, Long> implements ItemService {
 
     private final ItemDao itemDao;
-
     private final ItemMapper itemMapper;
+
+    @Autowired
+    public ItemServiceImpl(ItemDao itemDao, ItemMapper itemMapper) {
+        super(itemDao);
+        this.itemDao = itemDao;
+        this.itemMapper = itemMapper;
+    }
+
 
     @Transactional(readOnly = true)
     @Override
@@ -64,6 +69,25 @@ public class ItemServiceImpl implements ItemService {
         } else {
             throw new ResourceNotFoundException(String.format("Resource with id: %d", itemId));
         }
+    }
+
+    @Transactional
+    @Override
+    public Item getItemById(Long itemId) {
+        return itemDao.findById(itemId);
+    }
+
+    @Transactional
+    @Override
+    public ItemDto getItemDtoById(Long itemId) {
+        return itemMapper.itemToItemDto(getItemById(itemId));
+    }
+
+    @Override
+    public void markForDeleteItem(Long itemId) {
+        Item item = getItemById(itemId);
+        item.setPretendedToBeDeleted(true);
+        itemDao.update(item);
     }
 
 }

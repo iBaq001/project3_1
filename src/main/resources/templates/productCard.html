@@ -1,0 +1,15 @@
+<div class="card" style="width: 18rem;" th:fragment="productCard(name, price, basePrice, img, rating)">
+    <img th:src="${img}" height="250" width="100%" class="card-img-top">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${name}">Товар</h5>
+        <p class="card-text">Тут должно было быть описание товара, но его нет...</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Рейтинг: <span th:text="${#numbers.formatDecimal(rating, 1, 1)}">9,5</span></li>
+        <li class="list-group-item">Цена: <s th:text="${basePrice}">1200</s></li>
+        <li class="list-group-item">Цена со скидкой: <span th:text="${price}">1000</span></li>
+    </ul>
+    <div class="card-body">
+        <a href="#" class="btn btn-primary">В корзину</a>
+    </div>
+</div>

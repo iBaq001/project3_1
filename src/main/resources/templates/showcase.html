@@ -170,6 +170,12 @@
                            th:text="${shopDto.getPhone().substring(0,2)+' ('+shopDto.getPhone().substring(2,5)+') '+shopDto.getPhone().substring(5)}">
                             +7 (495) 777-77-77</a>
                     </p>
+
+                    <!-- Кнопка информации о магазине (для теста). Потом можно удалить,
+                    т.к. вся инфа есть на витрине -->
+                    <p>
+                    <a class="btn btn-large btn-info" th:href="${shopDto.getId() + '/about'} ">About Shop</a>
+                    </p>
                 </div>
                 <br>
 

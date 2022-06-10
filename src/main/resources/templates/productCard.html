@@ -1,8 +1,8 @@
-<div class="card" style="width: 18rem;" th:fragment="productCard(name, price, basePrice, img, rating)">
+<div class="card" style="width: 18rem;" th:fragment="productCard(name, price, basePrice, img, rating, description)">
     <img th:src="${img}" height="250" width="100%" class="card-img-top">
     <div class="card-body">
         <h5 class="card-title" th:text="${name}">Товар</h5>
-        <p class="card-text">Тут должно было быть описание товара, но его нет...</p>
+        <p class="card-text" th:text="${description}">Описание товара</p>
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">Рейтинг: <span th:text="${#numbers.formatDecimal(rating, 1, 1)}">9,5</span></li>

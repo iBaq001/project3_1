@@ -16,6 +16,7 @@ public class ItemToItemForShowcaseDtoConverter {
         ItemForShowcaseDto result = new ItemForShowcaseDto();
         result.setId(item.getId());
         result.setName(item.getName());
+        result.setDescription(item.getDescription());
         result.setBasePrice(item.getBasePrice());
         result.setPrice(item.getPrice());
         result.setCount(item.getCount());

@@ -56,7 +56,6 @@ public class Item {
     @Column(name = "rating")
     private double rating;
 
-
     private String description;
     private int discount;
 

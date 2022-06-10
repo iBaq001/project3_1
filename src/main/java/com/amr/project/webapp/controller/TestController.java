@@ -1,11 +1,16 @@
 package com.amr.project.webapp.controller;
 
+import com.amr.project.model.dto.ShopDto;
+import com.amr.project.service.abstracts.ShowcaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Min;
+import java.util.List;
 
 @RestController
 @RequestMapping("/test")
@@ -13,6 +18,7 @@ import javax.validation.constraints.Min;
 //Подробнее про аннотации swagger: https://habr.com/ru/post/536388/
 
 public class TestController {
+
     @GetMapping("")
     @Operation(
             summary = "Тестовый контроллер №1",
@@ -32,4 +38,5 @@ public class TestController {
         System.out.println("Тестовый контроллер №2");
         return "id = " + id;
     }
+
 }

@@ -52,4 +52,16 @@ public class ShowcaseRestController {
         return modelAndView;
     }
 
+    @GetMapping("/shop/id/{shopId}/about")
+    public ModelAndView about(@PathVariable Long shopId) {
+        Shop shop = showcaseService.findById(shopId);
+        shopDto = ShopToShopDtoConverter.convertShopToShopDto(shop);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("shop_info");
+        modelAndView.addObject("shopDto", shopDto);
+        modelAndView.addObject("itemsCategoriesInTheShop", showcaseService.returnCategoryOfItemsInTheShop(shopId));
+        modelAndView.addObject("itemsOfTheShop", showcaseService.itemsDtoOfTheShop(shopId));
+        return modelAndView;
+    }
+
 }

@@ -97,7 +97,7 @@ public class Item {
     private List<Review> reviews;
 
 
-    @ManyToMany(mappedBy = "items")
+    @ManyToMany(mappedBy = "items", cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Favorite> favorites;
 

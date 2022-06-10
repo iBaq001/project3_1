@@ -2,10 +2,13 @@ package com.amr.project.webapp.controller;
 
 import com.amr.project.model.dto.ItemDtoRequest;
 import com.amr.project.model.dto.ItemDto;
+import com.amr.project.model.entity.User;
+import com.amr.project.model.enums.Roles;
 import com.amr.project.service.abstracts.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,9 +39,21 @@ public class ItemController {
     }
 
     @DeleteMapping("{itemId}")
-    public ResponseEntity<Void> deleteItem(@PathVariable Long itemId) {
-        itemService.deleteItem(itemId);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<Void> deleteItem(@PathVariable Long itemId, @AuthenticationPrincipal User user) {
+        if (user.getRole() == Roles.ADMIN || user.getRole() == Roles.MODERATOR) {
+            itemService.deleteItem(itemId);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else if (user.getRole() == Roles.USER) {
+            itemService.markForDeleteItem(itemId);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @GetMapping("{itemId}")
+    @ResponseBody
+    public ItemDto getItemById(@PathVariable Long itemId) {
+        return itemService.getItemDtoById(itemId);
     }
 
 }

@@ -19,6 +19,7 @@ import java.util.List;
 public class ItemForShowcaseDto {
     private Long id;
     private String name;
+    private String description;
     private BigDecimal basePrice;
     private BigDecimal price;
     private int count;

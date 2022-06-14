@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+Test Security Page!
+<form th:action="@{/logout}" method="post">
+    <button type="submit" class="ui-button">Logout</button>
+</form>
+</body>
+</html>

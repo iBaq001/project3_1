@@ -10,5 +10,6 @@ public interface ItemDao extends ReadWriteDao<Item, Long> {
 
     public List<Item> getItemsByShopId(Long shopId);
 
+    List<Item> getItemsByName(String name);
 
 }

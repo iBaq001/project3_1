@@ -1,16 +1,15 @@
 package com.amr.project.dao.impl;
 
 import com.amr.project.dao.abstracts.ShopDao;
+import com.amr.project.model.entity.Item;
 import com.amr.project.model.entity.Shop;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class ShopDaoImpl extends ReadWriteDaoImpl<Shop, Long> implements ShopDao{
+public class ShopDaoImpl extends ReadWriteDaoImpl<Shop, Long> implements ShopDao {
 
 //    @Override
 //    public Shop findById(Long id) {
@@ -40,6 +39,13 @@ public class ShopDaoImpl extends ReadWriteDaoImpl<Shop, Long> implements ShopDao
         Shop shop = query.setParameter("name", name)
                 .getSingleResult();
         return shop;
+    }
+
+    @Override
+    public List<Shop> getShopByName(String name) {
+        return em.createQuery("select shop from Shop shop where shop.name like : like", Shop.class)
+                .setParameter("like", '%' + name + '%')
+                .getResultList();
     }
 //
 //    @Override

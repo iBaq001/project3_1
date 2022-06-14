@@ -17,4 +17,11 @@ public class ItemDaoImpl extends ReadWriteDaoImpl<Item, Long> implements ItemDao
         TypedQuery<Item> query = em.createQuery("select item from Item item where item.shop.id = :shopId", Item.class);
         return query.setParameter("shopId", shopId).getResultList();
     }
+
+    @Override
+    public List<Item> getItemsByName(String name) {
+        return em.createQuery("select item from Item item where item.name like : like", Item.class)
+                .setParameter("like", '%' + name + '%')
+                .getResultList();
+    }
 }

@@ -5,6 +5,7 @@ import com.amr.project.exception.ResourceNotFoundException;
 import com.amr.project.mapper.ItemMapper;
 import com.amr.project.model.dto.ItemDtoRequest;
 import com.amr.project.model.dto.ItemDto;
+import com.amr.project.model.dto.ShopDto;
 import com.amr.project.model.entity.Item;
 import com.amr.project.service.abstracts.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,13 @@ public class ItemServiceImpl extends ReadWriteServiceImpl<Item, Long> implements
         Item item = getItemById(itemId);
         item.setPretendedToBeDeleted(true);
         itemDao.update(item);
+    }
+    @Override
+    public List<ItemDto> getItemByName(String name) {
+        return itemDao.getItemsByName(name)
+                .stream()
+                .map(itemMapper::itemToItemDto)
+                .collect(Collectors.toList());
     }
 
 }

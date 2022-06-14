@@ -22,4 +22,6 @@ public interface ItemService extends ReadWriteService<Item, Long> {
 
     void markForDeleteItem(Long itemId);
 
+    List<ItemDto> getItemByName(String name);
+
 }

@@ -18,7 +18,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class FirstStartDB {
 
-    private final FirstStartDBDao firstStartDBDao;
+    private final FirstStartDBDao<Object> firstStartDBDao;
 
     private final ImagesToByteArrayConverter imagesToByteArrayConverter;
 
@@ -232,11 +232,11 @@ public class FirstStartDB {
                 .shop(shop1)
                 .build();
 
-        CartItem cartItem3 = CartItem.builder()
-                .quantity(1000)
-                .user(admin1)
-                .shop(shop1)
-                .build();
+//        CartItem cartItem3 = CartItem.builder()
+//                .quantity(1000)
+//                .user(admin1)
+//                .shop(shop1)
+//                .build();
 
         Category category1 = Category.builder()
                 .name("Beer")
@@ -428,11 +428,11 @@ public class FirstStartDB {
                 .shop(shop2)
                 .build();
 
-        CartItem cartItem4 = CartItem.builder()
-                .quantity(2000)
-                .user(admin2)
-                .shop(shop2)
-                .build();
+//        CartItem cartItem4 = CartItem.builder()
+//                .quantity(2000)
+//                .user(admin2)
+//                .shop(shop2)
+//                .build();
 
         Category category4 = Category.builder()
                 .name("SeaFoods")
@@ -648,7 +648,7 @@ public class FirstStartDB {
         firstStartDBDao.persist(cartItem1);
         firstStartDBDao.persist(category1);
         firstStartDBDao.persist(item1);
-        firstStartDBDao.persist(cartItem3);
+//        firstStartDBDao.persist(cartItem3);
         firstStartDBDao.persist(category3);
         firstStartDBDao.persist(item3);
 
@@ -658,7 +658,7 @@ public class FirstStartDB {
         firstStartDBDao.persist(cartItem2);
         firstStartDBDao.persist(category2);
         firstStartDBDao.persist(item2);
-        firstStartDBDao.persist(cartItem4);
+//        firstStartDBDao.persist(cartItem4);
         firstStartDBDao.persist(category4);
         firstStartDBDao.persist(item4);
 

@@ -1,0 +1,94 @@
+
+body {
+    background-color: #dde0e3;
+    font-family: Arial;
+    font-weight: 300;
+    font-size: 16px;
+    color: #1a1e21;
+
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 70px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Arial Black";
+    font-weight: 500;
+    color: #000000;
+}
+
+p {
+    line-height: 28px;
+    margin-bottom: 25px;
+}
+.centered {
+    text-align: center;
+}
+
+a {
+    color: #b02a37;
+}
+
+a:focus {
+    color: #6a1a21;
+    text-decoration: none;
+    outline: #f2e7c3;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #0dcaf0;
+}
+
+.navbar {
+    font-weight: 800;
+    font-size: 14px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navbar-inverse {
+    background: #4f5050;
+    border-color: #4f5050;
+}
+
+.navbar-inverse .navbar-nav > .active > a{
+    background-color: #0a53be;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #1a1e21;
+    font-weight: bolder;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+#headerwrap {
+    background: url(../img/f4oivpL5Yco.jpg) no-repeat center top;
+    margin-top: -10px;
+    padding-top: 20px;
+    text-align: center;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 400px;
+    width: 100%;
+
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#headerwrap h1 {
+    margin-top: 100px;
+    color: #0b2f65;
+    font-size: 70px;
+    font-weight: 300;
+    letter-spacing: 3px;
+}
+
+
+
+

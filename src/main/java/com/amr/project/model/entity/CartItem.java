@@ -50,22 +50,20 @@ public class CartItem implements Serializable {
     private User user;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "shop_id")
+//    @ToString.Exclude
+//    private Shop shop;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id")
     @ToString.Exclude
     private Shop shop;
 
 
-    @OneToMany(
-            mappedBy = "cartItem",
-            cascade = {CascadeType.MERGE,
-                    CascadeType.PERSIST,
-                    CascadeType.REFRESH,
-                    CascadeType.DETACH},
-            orphanRemoval = true
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
     @ToString.Exclude
-    private List<Item> itemsInCart;
+    private Item itemInCart;
 
     @Override
     public boolean equals(Object o) {

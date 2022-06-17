@@ -92,13 +92,10 @@ public class Shop implements Serializable {
     private User user;
 
 
-    @OneToOne(mappedBy = "shop", cascade = {CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH,
-            CascadeType.DETACH},
-            fetch = FetchType.LAZY, optional = false)
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     @ToString.Exclude
-    private CartItem cartItem;
+    private List<CartItem> cartItem;
 
 
     @OneToMany(

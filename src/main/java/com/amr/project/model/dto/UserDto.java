@@ -26,6 +26,8 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String password;
+
+
     private int age;
     private Gender gender;
     private LocalDate birthday;

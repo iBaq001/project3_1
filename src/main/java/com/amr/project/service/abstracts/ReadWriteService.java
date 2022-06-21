@@ -19,4 +19,5 @@ public interface ReadWriteService<T, K> {
     T findById(K id);
 
     List<T> findAll();
+
 }

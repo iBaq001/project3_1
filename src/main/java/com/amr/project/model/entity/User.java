@@ -46,6 +46,7 @@ public class User implements UserDetails {
     @ToString.Exclude
     private String email;
 
+
     @Column(name = "username", unique = true)
     @ToString.Exclude
     private String username;

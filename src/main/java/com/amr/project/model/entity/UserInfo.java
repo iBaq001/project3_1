@@ -32,8 +32,12 @@ import java.util.Objects;
 @AllArgsConstructor
 @ToString
 public class UserInfo {
-
-    //TODO удалить и объединить с сущностью User
+    public UserInfo(Long id, String phone, String firstName) {
+        this.id = id;
+        this.phone = phone;
+        this.firstName = firstName;
+    }
+//TODO удалить и объединить с сущностью User
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

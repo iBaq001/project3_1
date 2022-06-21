@@ -1,5 +1,6 @@
 package com.amr.project.webapp.config.security;
 
+import com.amr.project.service.impl.OidcUserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 
 @Configuration
 @EnableWebSecurity
@@ -45,14 +47,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .formLogin()
-//                .loginPage("/login")
+                .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .successForwardUrl("/")
                 .successHandler(successUserHandler).permitAll()
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login");
+                .logoutSuccessUrl("/login")
+                .and()
+                .oauth2Login()
+                .loginPage("/login")
+                .userInfoEndpoint()
+                .oidcUserService(oidcUserService());
     }
 
     @Override
@@ -60,4 +67,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/css/**", "/js/**");
     }
+
+    @Bean
+    public OidcUserService oidcUserService() {
+        return new OidcUserServiceImpl();
+    }
+
 }

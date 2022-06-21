@@ -80,7 +80,7 @@
                      alt="Photo" height="300" >
                 <div class="card-body">
                     <h5 class="card-title" th:text="${item.getName()}"></h5>
-                    <p>Цена р.</p>
+                    <p th:text="'Цена ' + ${item.getPrice()} + ' р.'"></p>
                     <a th:href="@{/item/{id}(id=${item.getId()})}" class="btn btn-info text-white" role="button">
                         Подробнее</a>
                 </div>

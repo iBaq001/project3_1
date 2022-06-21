@@ -28,21 +28,17 @@ public class MainPageServiceImpl implements MainPageService {
     }
 
     @Override
-    public Set<ItemForShowcaseDto> getBestRatingItems() {
-        return itemDao.findAll()
+    public Set<ItemForShowcaseDto> getBestRatingItems(int limit) {
+        return itemDao.getBestRatingItems(limit)
                 .stream()
-                .sorted(Comparator.comparingDouble(Item::getRating))
-                .limit(12)
                 .map(ItemToItemForShowcaseDtoConverter::convertItemToItemForShowcaseDto)
                 .collect(Collectors.toSet());
     }
 
     @Override
-    public Set<ShopDto> getBestRatingShops() {
-        return shopDao.findAll()
+    public Set<ShopDto> getBestRatingShops(int limit) {
+        return shopDao.getBestRatingShops(limit)
                 .stream()
-                .sorted(Comparator.comparingDouble(Shop::getRating))
-                .limit(12)
                 .map(ShopToShopDtoConverter::convertShopToShopDto)
                 .collect(Collectors.toSet());
     }

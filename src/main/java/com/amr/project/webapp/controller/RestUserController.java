@@ -26,21 +26,21 @@ public class RestUserController {
 
     @PostMapping
     public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
-        userService.save(userMapper.toUser(userDto));
+        userService.persist(userMapper.toUser(userDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(userDto);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable Long id) {
-        Optional<User> user = userService.findById(id);
-        return ResponseEntity.ok(userMapper.toUserDto(user.orElse(null)));
+        User user = userService.findById(id);
+        return ResponseEntity.ok(userMapper.userToUserDto(user));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody UserDto userDto) {
         User user = userMapper.toUser(userDto);
         user.setId(id);
-        userService.save(user);
+        userService.update(user);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userDto);
     }
 

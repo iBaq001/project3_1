@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 public class ShopToShopDtoConverter {
 
     public static ShopDto convertShopToShopDto(Shop shop) {
+        if(shop == null) {
+            return null;
+        }
         return new ShopDto(shop.getId(),
                 shop.getName(),
                 shop.getDescription(),

@@ -3,7 +3,11 @@ package com.amr.project.webapp.controller;
 import com.amr.project.converter.ShopToShopDtoConverter;
 import com.amr.project.model.dto.ShopDto;
 import com.amr.project.model.entity.Shop;
+import com.amr.project.model.entity.User;
+import com.amr.project.service.abstracts.CartItemService;
 import com.amr.project.service.abstracts.ShowcaseService;
+import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,11 +16,14 @@ import java.util.List;
 @RestController
 public class ShowcaseRestController {
 
-    ShowcaseService showcaseService;
-    ShopDto shopDto;
+    private ShowcaseService showcaseService;
+    private ShopDto shopDto;
 
-    public ShowcaseRestController(ShowcaseService showcaseService) {
+    private CartItemService cartItemService;
+
+    public ShowcaseRestController(ShowcaseService showcaseService, CartItemService cartItemService) {
         this.showcaseService = showcaseService;
+        this.cartItemService = cartItemService;
     }
 
     @GetMapping("/shop/all")
@@ -26,6 +33,7 @@ public class ShowcaseRestController {
 
     @GetMapping("/shop/{id}")
     public ShopDto getShopDtoById(@PathVariable Long id) {
+
         return showcaseService.getShopDtoById(id);
     }
 
@@ -41,7 +49,7 @@ public class ShowcaseRestController {
     }
 
     @GetMapping("/shop/id/{shopId}")
-    public ModelAndView showcase(@PathVariable Long shopId) {
+    public ModelAndView showcase(@PathVariable Long shopId, @AuthenticationPrincipal User loggedUser) {
         Shop shop = showcaseService.findById(shopId);
         shopDto = ShopToShopDtoConverter.convertShopToShopDto(shop);
         ModelAndView modelAndView = new ModelAndView();
@@ -49,6 +57,7 @@ public class ShowcaseRestController {
         modelAndView.addObject("shopDto", shopDto);
         modelAndView.addObject("itemsCategoriesInTheShop", showcaseService.returnCategoryOfItemsInTheShop(shopId));
         modelAndView.addObject("itemsOfTheShop", showcaseService.itemsDtoOfTheShop(shopId));
+        cartItemService.setUser(loggedUser);
         return modelAndView;
     }
 

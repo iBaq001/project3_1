@@ -10,6 +10,8 @@
         <li class="list-group-item">Цена со скидкой: <span th:text="${price}">1000</span></li>
     </ul>
     <div class="card-body">
-        <a href="#" class="btn btn-primary">В корзину</a>
+        <button class="btn btn-primary btn-add-to-cart"
+                th:shop-id="${shopid}" th:item-id="${itemid}" data-quantity="1">В корзину
+        </button>
     </div>
 </div>

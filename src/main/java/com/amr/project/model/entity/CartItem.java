@@ -65,6 +65,7 @@ public class CartItem implements Serializable {
     @ToString.Exclude
     private Item itemInCart;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -41,7 +41,7 @@ public class OidcUserServiceImpl extends OidcUserService {
                     .username(email)
                     .role(Roles.USER)
                     .build();
-            userDao.save(user);
+            userDao.persist(user);
         }
         return user;
     }

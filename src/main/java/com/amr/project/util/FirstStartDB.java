@@ -140,9 +140,6 @@ public class FirstStartDB {
                 .role(Roles.MODERATOR)
                 .personalData(moderator11PersonalData)
                 .images(moderator1Images)
-                .build();
-
-        UserInfo moderator1Info = UserInfo.builder()
                 .age(27)
                 .birthday(new Calendar.Builder()
                         .setDate(1995, 6, 11).build())
@@ -150,8 +147,12 @@ public class FirstStartDB {
                 .lastName("Аккерман")
                 .gender(Gender.MALE)
                 .phone("+7-999-555-55-55")
-                .user(moderator1)
                 .build();
+
+//        UserInfo moderator1Info = UserInfo.builder()
+//
+//                .user(moderator1)
+//                .build();
 
 
         Image admin1image1 = Image.builder()
@@ -182,9 +183,6 @@ public class FirstStartDB {
                 .role(Roles.ADMIN)
                 .personalData(admin1PersonalData)
                 .images(admin1Images)
-                .build();
-
-        UserInfo admin1Info = UserInfo.builder()
                 .age(25)
                 .birthday(new Calendar.Builder()
                         .setDate(1997, 1, 3).build())
@@ -192,8 +190,12 @@ public class FirstStartDB {
                 .lastName("Иванов")
                 .gender(Gender.MALE)
                 .phone("+7-999-999-99-99")
-                .user(admin1)
                 .build();
+
+//        UserInfo admin1Info = UserInfo.builder()
+//
+//                .user(admin1)
+//                .build();
 
         Coupon coupon1 = Coupon.builder()
                 .start(Calendar.getInstance())
@@ -226,18 +228,6 @@ public class FirstStartDB {
                 .rating(9.9)
                 .build();
 
-        CartItem cartItem1 = CartItem.builder()
-                .quantity(1000)
-                .user(admin1)
-                .shop(shop1)
-                .build();
-
-//        CartItem cartItem3 = CartItem.builder()
-//                .quantity(1000)
-//                .user(admin1)
-//                .shop(shop1)
-//                .build();
-
         Category category1 = Category.builder()
                 .name("Beer")
                 .build();
@@ -265,7 +255,7 @@ public class FirstStartDB {
                 .name("Хадыженское")
                 .price(BigDecimal.valueOf(85L))
                 .rating(9.5)
-                .cartItem(cartItem1)
+//                .cartItem(cartItem1)
                 .category(category1)
                 .shop(shop1)
                 .user(admin1)
@@ -291,7 +281,7 @@ public class FirstStartDB {
                 .name("Сидрoff")
                 .price(BigDecimal.valueOf(85L))
                 .rating(9.5)
-                .cartItem(cartItem1)
+//                .cartItem(cartItem1)
                 .category(category3)
                 .shop(shop1)
                 .user(admin1)
@@ -310,6 +300,20 @@ public class FirstStartDB {
                 .percentage(50)
                 .fixedDiscount(15)
                 .shop(shop1)
+                .build();
+
+        CartItem cartItem1 = CartItem.builder()
+                .quantity(1000)
+                .user(admin1)
+                .shop(shop1)
+                .itemInCart(item1)
+                .build();
+
+        CartItem cartItem3 = CartItem.builder()
+                .quantity(1000)
+                .user(admin1)
+                .shop(shop1)
+                .itemInCart(item3)
                 .build();
 
 
@@ -341,9 +345,6 @@ public class FirstStartDB {
                 .role(Roles.ADMIN)
                 .personalData(admin2PersonalData)
                 .images(admin2Images)
-                .build();
-
-        UserInfo admin2Info = UserInfo.builder()
                 .age(25)
                 .birthday(new Calendar.Builder()
                         .setDate(1997, 6, 15).build())
@@ -351,8 +352,12 @@ public class FirstStartDB {
                 .lastName("Олегарх")
                 .gender(Gender.MALE)
                 .phone("+7-999-999-99-88")
-                .user(admin2)
                 .build();
+
+//        UserInfo admin2Info = UserInfo.builder()
+//
+//                .user(admin2)
+//                .build();
 
         Coupon coupon2 = Coupon.builder()
                 .start(Calendar.getInstance())
@@ -385,12 +390,6 @@ public class FirstStartDB {
                 .logo(shop2Logo)
                 .build();
 
-        CartItem cartItem2 = CartItem.builder()
-                .quantity(2000)
-                .user(admin2)
-                .shop(shop2)
-                .build();
-
         Category category2 = Category.builder()
                 .name("Fish")
                 .build();
@@ -414,7 +413,7 @@ public class FirstStartDB {
                 .name("Язь Суздальский")
                 .price(BigDecimal.valueOf(85L))
                 .rating(7.5)
-                .cartItem(cartItem2)
+//                .cartItem(cartItem2)
                 .category(category2)
                 .shop(shop2)
                 .user(admin2)
@@ -427,12 +426,6 @@ public class FirstStartDB {
                 .fixedDiscount(15)
                 .shop(shop2)
                 .build();
-
-//        CartItem cartItem4 = CartItem.builder()
-//                .quantity(2000)
-//                .user(admin2)
-//                .shop(shop2)
-//                .build();
 
         Category category4 = Category.builder()
                 .name("SeaFoods")
@@ -462,6 +455,20 @@ public class FirstStartDB {
                 .shop(shop2)
                 .user(admin2)
                 .images(item4Images)
+                .build();
+
+        CartItem cartItem2 = CartItem.builder()
+                .quantity(2000)
+                .user(admin2)
+                .shop(shop2)
+                .itemInCart(item2)
+                .build();
+
+        CartItem cartItem4 = CartItem.builder()
+                .quantity(2000)
+                .user(admin2)
+                .shop(shop2)
+                .itemInCart(item4)
                 .build();
 
 
@@ -509,9 +516,6 @@ public class FirstStartDB {
                 .personalData(user1PersonalData)
                 .address(address6)
                 .images(user1Images)
-                .build();
-
-        UserInfo user1Info = UserInfo.builder()
                 .age(25)
                 .birthday(new Calendar.Builder()
                         .setDate(1997, 2, 5).build())
@@ -519,8 +523,12 @@ public class FirstStartDB {
                 .lastName("Рублёвский")
                 .gender(Gender.MALE)
                 .phone("+7-999-111-99-88")
-                .user(user1)
                 .build();
+
+//        UserInfo user1Info = UserInfo.builder()
+//
+//                .user(user1)
+//                .build();
 
         Favorite favoriteUser1 = Favorite.builder()
                 .items(favoriteItemsUser1)
@@ -563,9 +571,6 @@ public class FirstStartDB {
                 .personalData(user2PersonalData)
                 .address(address7)
                 .images(user2Images)
-                .build();
-
-        UserInfo user2Info = UserInfo.builder()
                 .age(25)
                 .birthday(new Calendar.Builder()
                         .setDate(1997, 4, 11).build())
@@ -573,8 +578,12 @@ public class FirstStartDB {
                 .lastName("Фокша")
                 .gender(Gender.MALE)
                 .phone("+7-999-441-99-88")
-                .user(user2)
                 .build();
+
+//        UserInfo user2Info = UserInfo.builder()
+//
+//                .user(user2)
+//                .build();
 
         Favorite favoriteUser2 = Favorite.builder()
                 .items(favoriteItemsUser2)
@@ -610,9 +619,6 @@ public class FirstStartDB {
                 .personalData(user3PersonalData)
                 .address(address8)
                 .images(user3Images)
-                .build();
-
-        UserInfo user3Info = UserInfo.builder()
                 .age(25)
                 .birthday(new Calendar.Builder()
                         .setDate(1997, 3, 7).build())
@@ -620,8 +626,12 @@ public class FirstStartDB {
                 .lastName("Гормаш")
                 .gender(Gender.MALE)
                 .phone("+7-939-441-54-88")
-                .user(user3)
                 .build();
+
+//        UserInfo user3Info = UserInfo.builder()
+//
+//                .user(user3)
+//                .build();
 
 
         firstStartDBDao.persist(country1);
@@ -640,39 +650,41 @@ public class FirstStartDB {
         firstStartDBDao.persist(address8);
 
         firstStartDBDao.persist(moderator1);
-        firstStartDBDao.persist(moderator1Info);
+//        firstStartDBDao.persist(moderator1Info);
 
         firstStartDBDao.persist(admin1);
-        firstStartDBDao.persist(admin1Info);
+//        firstStartDBDao.persist(admin1Info);
         firstStartDBDao.persist(shop1);
-        firstStartDBDao.persist(cartItem1);
+
         firstStartDBDao.persist(category1);
         firstStartDBDao.persist(item1);
-//        firstStartDBDao.persist(cartItem3);
         firstStartDBDao.persist(category3);
         firstStartDBDao.persist(item3);
 
         firstStartDBDao.persist(admin2);
-        firstStartDBDao.persist(admin2Info);
+//        firstStartDBDao.persist(admin2Info);
         firstStartDBDao.persist(shop2);
-        firstStartDBDao.persist(cartItem2);
+
         firstStartDBDao.persist(category2);
         firstStartDBDao.persist(item2);
-//        firstStartDBDao.persist(cartItem4);
         firstStartDBDao.persist(category4);
         firstStartDBDao.persist(item4);
 
         firstStartDBDao.persist(user1);
-        firstStartDBDao.persist(user1Info);
+//        firstStartDBDao.persist(user1Info);
         firstStartDBDao.persist(favoriteUser1);
 
         firstStartDBDao.persist(user2);
-        firstStartDBDao.persist(user2Info);
+//        firstStartDBDao.persist(user2Info);
         firstStartDBDao.persist(favoriteUser2);
 
         firstStartDBDao.persist(user3);
-        firstStartDBDao.persist(user3Info);
+//        firstStartDBDao.persist(user3Info);
 
+        firstStartDBDao.persist(cartItem1);
+        firstStartDBDao.persist(cartItem3);
+        firstStartDBDao.persist(cartItem2);
+        firstStartDBDao.persist(cartItem4);
     }
 }
 

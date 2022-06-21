@@ -51,7 +51,7 @@ public class Item {
     private BigDecimal price;
 
     @Column(name = "count")
-    private int count;
+    private int count; //Вероятно это ненужное поле. Количество товара в корзине хранится в CartItem
 
     @Column(name = "rating")
     private double rating;
@@ -67,10 +67,10 @@ public class Item {
     @JoinColumn(name = "category_id")
     private Category category;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @ToString.Exclude
-    private CartItem cartItem;
+//вероятно лишнее поле. Иформация о товарах в корзине хранится в сущности CartItem. Сущности товар д.б. все равно в каких корзинах он лежит
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    private CartItem cartItem;
 
 
     @OneToMany(

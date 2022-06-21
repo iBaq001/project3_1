@@ -83,6 +83,9 @@ public class Address {
     @ToString.Exclude
     private List<Order> orders;
 
+    @ToString.Exclude
+    private String additionalInfo;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

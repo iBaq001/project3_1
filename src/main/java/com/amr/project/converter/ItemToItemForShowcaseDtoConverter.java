@@ -13,6 +13,9 @@ public class ItemToItemForShowcaseDtoConverter {
 
 
     public static ItemForShowcaseDto convertItemToItemForShowcaseDto(Item item) {
+        if (item == null) {
+            return null;
+        }
         ItemForShowcaseDto result = new ItemForShowcaseDto();
         result.setId(item.getId());
         result.setName(item.getName());

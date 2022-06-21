@@ -16,8 +16,8 @@ public class MainPageController {
 
     @GetMapping("/")
     public String getMainPage(Model model) {
-        model.addAttribute("bestRatingShops", mainPageService.getBestRatingShops(12));
-        model.addAttribute("bestRatingItems", mainPageService.getBestRatingItems(12));
+        model.addAttribute("bestRatingShops", mainPageService.getBestRatingShops());
+        model.addAttribute("bestRatingItems", mainPageService.getBestRatingItems());
         return "index";
     }
 }

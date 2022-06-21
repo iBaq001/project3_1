@@ -20,7 +20,7 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <org.json.version>20210307</org.json.version>
         <scribejava-apis.version>8.3.1</scribejava-apis.version>
-        <mysql-connector.version>8.0.28</mysql-connector.version>
+        <mysql-connector.version>8.0.25</mysql-connector.version>
         <com.paypal.sdk.version>1.4.2</com.paypal.sdk.version>
     </properties>
 
@@ -154,7 +154,7 @@
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-processor</artifactId>
+            <artifactId>mapstruct-processor</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
         <dependency>

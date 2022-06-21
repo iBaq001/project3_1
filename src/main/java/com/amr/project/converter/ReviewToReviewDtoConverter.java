@@ -8,6 +8,9 @@ import java.time.ZoneId;
 public class ReviewToReviewDtoConverter {
 
     public static ReviewDto convertReviewToReviewDto(Review review) {
+        if(review == null) {
+            return null;
+        }
         return new ReviewDto(review.getId(),
                 review.getDignity(),
                 review.getFlaw(),

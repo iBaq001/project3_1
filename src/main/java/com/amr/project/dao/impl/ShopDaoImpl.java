@@ -26,5 +26,15 @@ public class ShopDaoImpl extends ReadWriteDaoImpl<Shop, Long> implements ShopDao
                 .setParameter("like", '%' + name + '%')
                 .getResultList();
     }
+//
+//    @Override
+//    public void save(Shop shop) {
+//        em.persist(shop);
+//    }
 
+    public List<Shop> getBestRatingShops(int limit) {
+        return em.createQuery("SELECT shop FROM Shop shop ORDER BY shop.rating DESC", Shop.class)
+                .setMaxResults(limit)
+                .getResultList();
+    }
 }

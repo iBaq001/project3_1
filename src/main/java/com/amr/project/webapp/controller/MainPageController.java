@@ -1,4 +1,4 @@
-package com.amr.project.controller;
+package com.amr.project.webapp.controller;
 
 import com.amr.project.service.abstracts.MainPageService;
 import org.springframework.stereotype.Controller;
@@ -16,8 +16,8 @@ public class MainPageController {
 
     @GetMapping("/")
     public String getMainPage(Model model) {
-        model.addAttribute("bestRatingShops", mainPageService.getBestRatingShops());
-        model.addAttribute("bestRatingItems", mainPageService.getBestRatingItems());
+        model.addAttribute("bestRatingShops", mainPageService.getBestRatingShops(12));
+        model.addAttribute("bestRatingItems", mainPageService.getBestRatingItems(12));
         return "index";
     }
 }

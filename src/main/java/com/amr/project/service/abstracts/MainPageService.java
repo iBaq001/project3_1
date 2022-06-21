@@ -6,7 +6,7 @@ import com.amr.project.model.dto.ShopDto;
 import java.util.Set;
 
 public interface MainPageService {
-    Set<ItemForShowcaseDto> getBestRatingItems();
+    Set<ItemForShowcaseDto> getBestRatingItems(int limit);
 
-    Set<ShopDto> getBestRatingShops();
+    Set<ShopDto> getBestRatingShops(int limit);
 }

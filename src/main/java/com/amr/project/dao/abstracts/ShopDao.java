@@ -18,4 +18,6 @@ public interface ShopDao extends ReadWriteDao<Shop, Long> {
     Shop findShopByName(String name);
 
     List<Shop> getShopByName(String name);
+
+    List<Shop> getBestRatingShops(int limit);
 }

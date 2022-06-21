@@ -11,4 +11,6 @@ public interface ItemDao extends ReadWriteDao<Item, Long> {
 
     List<Item> getItemsByName(String name);
 
+    List<Item> getBestRatingItems(int limit);
+
 }

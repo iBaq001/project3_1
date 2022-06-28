@@ -3,9 +3,11 @@ package com.amr.project.util;
 import com.amr.project.converter.ImagesToByteArrayConverter;
 import com.amr.project.dao.impl.FirstStartDBDao;
 import com.amr.project.model.entity.*;
+import com.amr.project.model.entity.report.SalesHistory;
 import com.amr.project.model.enums.Gender;
 import com.amr.project.model.enums.PersonalDataStatus;
 import com.amr.project.model.enums.Roles;
+import com.amr.project.model.enums.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -245,7 +247,7 @@ public class FirstStartDB {
         item1Images.add(item1image1);
 
         Item item1 = Item.builder()
-                .basePrice(BigDecimal.valueOf(100L))
+                .basePrice(BigDecimal.valueOf(30L))
                 .count(29)
                 .description("Пиво пенное, разливное, обалденное")
                 .discount(15)
@@ -253,7 +255,7 @@ public class FirstStartDB {
                 .isModerated(true)
                 .isPretendedToBeDeleted(false)
                 .name("Хадыженское")
-                .price(BigDecimal.valueOf(85L))
+                .price(BigDecimal.valueOf(100L))
                 .rating(9.5)
 //                .cartItem(cartItem1)
                 .category(category1)
@@ -271,7 +273,7 @@ public class FirstStartDB {
         item3Images.add(item3image1);
 
         Item item3 = Item.builder()
-                .basePrice(BigDecimal.valueOf(100L))
+                .basePrice(BigDecimal.valueOf(30L))
                 .count(30)
                 .description("Сидр, как пиво, но лучше")
                 .discount(15)
@@ -279,7 +281,7 @@ public class FirstStartDB {
                 .isModerated(true)
                 .isPretendedToBeDeleted(false)
                 .name("Сидрoff")
-                .price(BigDecimal.valueOf(85L))
+                .price(BigDecimal.valueOf(100L))
                 .rating(9.5)
 //                .cartItem(cartItem1)
                 .category(category3)
@@ -403,7 +405,7 @@ public class FirstStartDB {
         item2Images.add(item2image1);
 
         Item item2 = Item.builder()
-                .basePrice(BigDecimal.valueOf(100L))
+                .basePrice(BigDecimal.valueOf(30L))
                 .count(2)
                 .description("Язь, здоровенный, обалденный, ЯЗЬ!")
                 .discount(15)
@@ -411,7 +413,7 @@ public class FirstStartDB {
                 .isModerated(true)
                 .isPretendedToBeDeleted(false)
                 .name("Язь Суздальский")
-                .price(BigDecimal.valueOf(85L))
+                .price(BigDecimal.valueOf(100))
                 .rating(7.5)
 //                .cartItem(cartItem2)
                 .category(category2)
@@ -440,7 +442,7 @@ public class FirstStartDB {
         item4Images.add(item4image1);
 
         Item item4 = Item.builder()
-                .basePrice(BigDecimal.valueOf(100L))
+                .basePrice(BigDecimal.valueOf(30L))
                 .count(2)
                 .description("Буль-буль кальмарики")
                 .discount(15)
@@ -448,7 +450,7 @@ public class FirstStartDB {
                 .isModerated(true)
                 .isPretendedToBeDeleted(false)
                 .name("Кальмары сушеные")
-                .price(BigDecimal.valueOf(85L))
+                .price(BigDecimal.valueOf(100L))
                 .rating(8.5)
 //                .cartItem(cartItem4)
                 .category(category4)
@@ -634,6 +636,51 @@ public class FirstStartDB {
 //                .build();
 
 
+        Calendar date = Calendar.getInstance();
+        date.add(Calendar.WEEK_OF_MONTH, 1);
+        Calendar date2 = Calendar.getInstance();
+        date2.add(Calendar.WEEK_OF_MONTH, -1);
+        List<Item> items = new ArrayList<>();
+        items.add(item1);
+        items.add(item3);
+        items.add(item2);
+        items.add(item2);
+        items.add(item2);
+        items.add(item1);
+
+        List<Item> items2 = new ArrayList<>();
+        items2.add(item1);
+        items2.add(item1);
+        items2.add(item1);
+        items2.add(item3);
+        items2.add(item2);
+        items2.add(item2);
+        items2.add(item2);
+        items2.add(item2);
+        items2.add(item2);
+        items2.add(item2);
+        items2.add(item1);
+
+
+        Order order = Order.builder()
+                .orderDate(Calendar.getInstance())
+                .itemsInOrder(items)
+                .address(address1)
+                .expectedDeliveryDate(date)
+                .user(user3)
+                .status(Status.START)
+                .build();
+
+        Order order2 = Order.builder()
+                .orderDate(date2)
+                .itemsInOrder(items2)
+                .address(address3)
+                .expectedDeliveryDate(date)
+                .user(user2)
+                .status(Status.START)
+                .build();
+
+
         firstStartDBDao.persist(country1);
         firstStartDBDao.persist(city1);
         firstStartDBDao.persist(city2);
@@ -680,11 +727,14 @@ public class FirstStartDB {
 
         firstStartDBDao.persist(user3);
 //        firstStartDBDao.persist(user3Info);
-
         firstStartDBDao.persist(cartItem1);
         firstStartDBDao.persist(cartItem3);
         firstStartDBDao.persist(cartItem2);
         firstStartDBDao.persist(cartItem4);
+
+
+        firstStartDBDao.persist(order);
+        firstStartDBDao.persist(order2);
     }
 }
 

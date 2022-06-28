@@ -29,5 +29,9 @@ public class ShopServiceImpl extends ReadWriteServiceImpl<Shop, Long> implements
                 .map(shopMapper::shopToShopDto)
                 .collect(Collectors.toList());
     }
+    @Override
+    public ShopDto getShopDtoById(Long shopId) {
+        return shopMapper.shopToShopDto(shopDao.findById(shopId));
+    }
 
 }

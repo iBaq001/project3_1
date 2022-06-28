@@ -4,6 +4,7 @@ import com.amr.project.model.enums.Gender;
 import com.amr.project.model.enums.Roles;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.jboss.aerogear.security.otp.api.Base32;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -67,8 +68,11 @@ public class User implements UserDetails {
     private boolean isIdentification;
 
 
+
+
     public User() {
-        this.secret = UUID.randomUUID().toString();
+        super();
+        this.secret = Base32.random();
     }
 
     @Enumerated(EnumType.STRING)

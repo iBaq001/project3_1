@@ -610,8 +610,8 @@ public class FirstStartDB {
                 .build();
 
         User user3 = User.builder()
-                .isUsing2FA(true)
-                .isIdentification(true)
+                .isUsing2FA(false)
+                .isIdentification(false)
                 .activate(true)
                 .email("user3@mail.ru")
                 .username("user3")

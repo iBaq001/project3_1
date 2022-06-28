@@ -123,6 +123,14 @@ public class Item {
     @ToString.Exclude
     private List<SalesHistory> history;
 
+    @OneToMany(
+            mappedBy = "item",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @ToString.Exclude
+    private List<Feedback> feedbacks;
+
 
     private boolean isModerated;
     private boolean isModerateAccept;

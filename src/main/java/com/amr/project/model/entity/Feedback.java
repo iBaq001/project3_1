@@ -1,5 +1,6 @@
 package com.amr.project.model.entity;
 
+import com.amr.project.model.dto.FeedbackDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,6 +46,11 @@ public class Feedback {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @ToString.Exclude
+    private Item item;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
     private User user;
 
     @Override
@@ -59,4 +65,5 @@ public class Feedback {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ShopService extends ReadWriteService<Shop, Long> {
     List<ShopDto> getShopByName(String name);
+    ShopDto getShopDtoById(Long shopId);
 }

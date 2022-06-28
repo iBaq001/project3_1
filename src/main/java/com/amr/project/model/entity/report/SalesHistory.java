@@ -33,7 +33,6 @@ public class SalesHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Calendar orderDate;     //Дата продажи товара
     private int count;              //Кол-во проданного товара в этот день
     private BigDecimal basePrice;   //Себестоимость товара ("= basePrice" в таблице "item")

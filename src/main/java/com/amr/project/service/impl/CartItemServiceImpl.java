@@ -157,4 +157,18 @@ public class CartItemServiceImpl extends ReadWriteServiceImpl<CartItem, Long> im
         }
     }
 
+    //Дальше методы-прослойки для тестирования
+
+    public List<CartItem> getListOfCartItemsTest(User user){
+        return getListOfCartItems(user);
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void joinSameCartItemsTest(User user) {
+        joinSameCartItems(user);
+    }
+
 }

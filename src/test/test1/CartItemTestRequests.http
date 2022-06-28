@@ -1,0 +1,46 @@
+# файл писался для себя, его наличие не требуется
+
+
+# проверка выдачи корзины
+GET http://localhost:8080/cart/
+
+
+###
+# Проверка добавления товара в корзину
+
+POST http://localhost:8080/cart/addItem?itemId=1&shopId=1&quantity=1
+
+
+###
+# Проверка изменения количества в корзине
+
+PUT http://localhost:8888/cart/
+Content-Type: application/json
+
+[
+  {
+    "id": 1,
+    "itemId": 1,
+    "quantity": 5555,
+    "shopId": 1
+  },
+  {
+    "id": 2,
+    "itemId": 2,
+    "quantity": 9999,
+    "shopId": 1
+  }
+]
+
+
+###
+# проверка удаления записи корзины
+
+# добавляем 1 новую запись корзины
+POST http://localhost:8080/cart/addItem?itemId=1&shopId=1&quantity=1
+
+# и удаляем ее
+DELETE http://localhost:8080/cart/?cartItemId=5
+###
+# строка №1 не удалится т.к. id юзера в ней отличается от текущего юзера в программе
+# DELETE http://localhost:8080/cart/?cartItemId=1

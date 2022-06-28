@@ -1,9 +1,14 @@
 package com.amr.project.webapp.config.security;
 
 import com.amr.project.service.impl.OidcUserServiceImpl;
+import com.amr.project.webapp.config.google2fa.CustomAuthenticationProvider;
+import com.amr.project.webapp.config.google2fa.CustomWebAuthenticationDetailsSource;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -21,19 +26,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final SuccessUserHandler successUserHandler;
+    @Autowired
+    private CustomWebAuthenticationDetailsSource authenticationDetailsSource;
 
-//    @Bean
+
+    //    @Bean
 //    public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
+    @Bean
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder())
-        ;
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Override
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authProvider());
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authProvider() {
+        final CustomAuthenticationProvider authProvider = new CustomAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+//        authProvider.setPostAuthenticationChecks(differentLocationChecker);
+        return authProvider;
     }
 
     @Override
@@ -42,15 +63,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/signup", "/confirm", "/code", "/confirm-account").permitAll()
+
                 .anyRequest()
 //                .authenticated()
                 .permitAll()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .successForwardUrl("/")
-                .successHandler(successUserHandler).permitAll()
+
+                //логин с кастомным Auth provider (для 2FA)
+                .formLogin().
+                loginPage("/login").permitAll().
+                loginProcessingUrl("/login")
+                .defaultSuccessUrl("/")
+                .authenticationDetailsSource(authenticationDetailsSource)
+
                 .and()
                 .logout()
                 .logoutUrl("/logout")
@@ -72,5 +98,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public OidcUserService oidcUserService() {
         return new OidcUserServiceImpl();
     }
+
 
 }

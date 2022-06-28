@@ -2,9 +2,11 @@ package com.amr.project.webapp.controller;
 
 import com.amr.project.model.dto.ShopDto;
 import com.amr.project.service.abstracts.ShowcaseService;
+import com.amr.project.service.impl.MailSenderRealizationImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.mail.MailSender;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ import java.util.List;
 //Подробнее про аннотации swagger: https://habr.com/ru/post/536388/
 
 public class TestController {
+    private MailSenderRealizationImpl mailSender;
 
     @GetMapping("")
     @Operation(

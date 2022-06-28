@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserDao userDao;
+    private User user;
 
     @Transactional
     @Override
@@ -24,4 +25,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public User findUserByEmail(String email) {
         return userDao.findUserByEmail(email);
     }
+
+    public boolean isEnabled() {
+        return user.isActivate();
+    }
+
+
 }

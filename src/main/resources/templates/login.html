@@ -18,17 +18,34 @@
         <h2 class="form-signin-heading">Please sign in</h2>
         <p>
             <label for="username" class="sr-only">Email</label>
-            <input type="text" id="username" name="username" class="form-control" placeholder="Email" required autofocus>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Email" required
+                   autofocus>
         </p>
         <p>
             <label for="password" class="sr-only">Password</label>
-            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                   required>
+        </p>
+        <div class="form-group">
+            <label class="control-label col-xs-2" for="code"> Code:</label>
+            <div class="col-xs-10">
+                <input id="code" type="text" name="code"/>
+            </div>
+            <br/>
+            <p class="text-muted col-xs-10">
+                Используйте приложение Google Authenticator для получения одноразового кода</p>
+        </div>
+        <p>
+            <a th:href="@{/code}" class="btn btn-lg btn-light btn-block">Получить одноразовый код</a>
         </p>
         <p>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </p>
         <p>
             <a th:href="@{/oauth2/authorization/google}" class="btn btn-lg btn-light btn-block">Войти через Google</a>
+        </p>
+        <p>
+            <a th:href="@{/signup}" class="btn btn-lg btn-light btn-block">Зарегестрироваться</a>
         </p>
 
     </form>

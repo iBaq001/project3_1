@@ -5,8 +5,8 @@ import com.amr.project.model.dto.ShopDto;
 import com.amr.project.model.entity.Shop;
 import com.amr.project.model.entity.User;
 import com.amr.project.service.abstracts.CartItemService;
+import com.amr.project.service.abstracts.FavoriteService;
 import com.amr.project.service.abstracts.ShowcaseService;
-import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,13 +17,15 @@ import java.util.List;
 public class ShowcaseRestController {
 
     private ShowcaseService showcaseService;
+    private FavoriteService favoriteService;
     private ShopDto shopDto;
 
     private CartItemService cartItemService;
 
-    public ShowcaseRestController(ShowcaseService showcaseService, CartItemService cartItemService) {
+    public ShowcaseRestController(ShowcaseService showcaseService, CartItemService cartItemService, FavoriteService favoriteService) {
         this.showcaseService = showcaseService;
         this.cartItemService = cartItemService;
+        this.favoriteService = favoriteService;
     }
 
     @GetMapping("/shop/all")
@@ -54,6 +56,11 @@ public class ShowcaseRestController {
         shopDto = ShopToShopDtoConverter.convertShopToShopDto(shop);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("showcase");
+        if (loggedUser != null) {
+            modelAndView.addObject("favorite", favoriteService.getFavorite(loggedUser.getId()));
+        } else {
+            modelAndView.addObject("favorite", null);
+        }
         modelAndView.addObject("shopDto", shopDto);
         modelAndView.addObject("itemsCategoriesInTheShop", showcaseService.returnCategoryOfItemsInTheShop(shopId));
         modelAndView.addObject("itemsOfTheShop", showcaseService.itemsDtoOfTheShop(shopId));

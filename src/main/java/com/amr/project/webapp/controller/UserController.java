@@ -28,7 +28,7 @@ public class UserController {
 //контроллер для инфо о текущем юзере (можно доработать в личный кабинет)
     @GetMapping("/user")
     public String userInfo(@AuthenticationPrincipal User user, Model model) {
-        model.addAttribute("user", userService.findUserByEmail(user.getEmail()));
+        model.addAttribute("user", userService.findUserByUsername(user.getUsername()));
         return "user";
     }
 }

@@ -6,6 +6,7 @@ import com.amr.project.model.dto.ShopDto;
 import com.amr.project.model.entity.Shop;
 import com.amr.project.service.abstracts.ShopService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +33,12 @@ public class ShopServiceImpl extends ReadWriteServiceImpl<Shop, Long> implements
     @Override
     public ShopDto getShopDtoById(Long shopId) {
         return shopMapper.shopToShopDto(shopDao.findById(shopId));
+    }
+
+    @Transactional
+    @Override
+    public Shop getShopById(Long shopId) {
+        return shopDao.findById(shopId);
     }
 
 }

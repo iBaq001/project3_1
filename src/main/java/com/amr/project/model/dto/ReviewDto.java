@@ -29,4 +29,5 @@ public class ReviewDto {
     private Long userId;
     private String userName;
     private Long shopId;
+    private boolean isModerated;
 }

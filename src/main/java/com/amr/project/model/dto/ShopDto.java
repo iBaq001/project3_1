@@ -28,4 +28,5 @@ public class ShopDto {
     private CityDto location;
     private Long userId;
     private List<Long> couponIds;
+    private boolean isModerated;
 }

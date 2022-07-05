@@ -7,7 +7,7 @@ import com.amr.project.model.entity.Category;
 import com.amr.project.service.abstracts.CategoryService;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,9 +24,9 @@ public class CategoryServiceImpl extends ReadWriteServiceImpl<Category,Long> imp
     }
 
     @Override
-    public Set<CategoryDto> findAllCategoriesByShopId(Long shopId) {
+    public List<CategoryDto> findAllCategoriesByShopId(Long shopId) {
         return categoryDao.findAllCategoriesByShopId(shopId).stream()
                 .map(categoryMapper::categoryToCategoryDto)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

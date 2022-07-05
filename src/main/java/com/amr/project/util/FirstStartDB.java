@@ -231,10 +231,12 @@ public class FirstStartDB {
                 .build();
 
         Category category1 = Category.builder()
+                .shopId(1L)
                 .name("Beer")
                 .build();
 
         Category category3 = Category.builder()
+                .shopId(1L)
                 .name("Sidr")
                 .build();
 
@@ -393,6 +395,7 @@ public class FirstStartDB {
                 .build();
 
         Category category2 = Category.builder()
+                .shopId(2L)
                 .name("Fish")
                 .build();
 
@@ -430,6 +433,7 @@ public class FirstStartDB {
                 .build();
 
         Category category4 = Category.builder()
+                .shopId(2L)
                 .name("SeaFoods")
                 .build();
 

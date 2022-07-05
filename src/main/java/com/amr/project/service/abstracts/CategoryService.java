@@ -3,8 +3,8 @@ package com.amr.project.service.abstracts;
 import com.amr.project.model.dto.CategoryDto;
 import com.amr.project.model.entity.Category;
 
-import java.util.Set;
+import java.util.List;
 
 public interface CategoryService extends ReadWriteService<Category,Long> {
-    Set<CategoryDto> findAllCategoriesByShopId(Long shopId);
+    List<CategoryDto> findAllCategoriesByShopId(Long shopId);
 }

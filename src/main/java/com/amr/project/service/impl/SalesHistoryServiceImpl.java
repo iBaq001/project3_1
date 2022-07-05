@@ -2,6 +2,7 @@ package com.amr.project.service.impl;
 
 import com.amr.project.dao.abstracts.OrderDao;
 import com.amr.project.dao.abstracts.SalesHistoryDao;
+import com.amr.project.mapper.CategoryMapper;
 import com.amr.project.mapper.SalesHistoryMapper;
 import com.amr.project.model.dto.CategoryDto;
 import com.amr.project.model.dto.ShopDto;
@@ -9,7 +10,6 @@ import com.amr.project.model.dto.report.SalesHistoryDto;
 import com.amr.project.model.entity.Item;
 import com.amr.project.model.entity.Order;
 import com.amr.project.model.entity.report.SalesHistory;
-import com.amr.project.service.abstracts.CategoryService;
 import com.amr.project.service.abstracts.SalesHistoryService;
 import com.amr.project.service.abstracts.ShopService;
 import org.springframework.stereotype.Service;
@@ -20,27 +20,29 @@ import java.util.stream.Collectors;
 @Service
 public class SalesHistoryServiceImpl extends ReadWriteServiceImpl<SalesHistory, Long> implements SalesHistoryService {
 
+    private final SalesHistoryDao salesHistoryDao;
     private final OrderDao orderDao;
     private final ShopService shopService;
-    private final CategoryService categoryService;
+    private final CategoryMapper categoryMapper;
     private final SalesHistoryMapper salesHistoryMapper;
 
 
     public SalesHistoryServiceImpl(SalesHistoryDao salesHistoryDao,
                                    OrderDao orderDao,
                                    ShopService shopService,
-                                   CategoryService categoryService,
+                                   CategoryMapper categoryMapper,
                                    SalesHistoryMapper salesHistoryMapper) {
         super(salesHistoryDao);
+        this.salesHistoryDao = salesHistoryDao;
         this.orderDao = orderDao;
         this.shopService = shopService;
-        this.categoryService = categoryService;
+        this.categoryMapper = categoryMapper;
         this.salesHistoryMapper = salesHistoryMapper;
     }
 
 
     @Override
-    public List<SalesHistoryDto> firstFilterBeforePersistAllSalesHistory(Long shopId) {
+    public List<SalesHistoryDto> getAllShopSalesHistoryById(Long shopId) {
 
         List<SalesHistoryDto> salesHistories = new ArrayList<>();
         List<Order> ordersList = orderDao.findAll();
@@ -100,6 +102,7 @@ public class SalesHistoryServiceImpl extends ReadWriteServiceImpl<SalesHistory, 
                                                            String typeOfFilter,
                                                            Calendar date1,
                                                            Calendar date2) {
+
         List<SalesHistoryDto> allSalesFiltered = new ArrayList<>();
         if (typeOfFilter != null) {
             switch (typeOfFilter) {
@@ -142,21 +145,21 @@ public class SalesHistoryServiceImpl extends ReadWriteServiceImpl<SalesHistory, 
     }
 
     @Override
-    public Set<CategoryDto> getCategoriesSet(Long shopId) {
-        Set<CategoryDto> categoryDtoSet = categoryService.findAllCategoriesByShopId(shopId);
-        if (categoryDtoSet == null) {
-            Objects.requireNonNull(categoryDtoSet, "categoryDtoSet не может быть null");
-        } else if (!categoryDtoSet.isEmpty()) {
-            return categoryDtoSet;
+    public List<CategoryDto> getCategoriesList(Long shopId) {
+        List<CategoryDto> categoryDtoList = salesHistoryDao.findAllCategoriesByShopId(shopId).stream()
+                .map(categoryMapper::categoryToCategoryDto).collect(Collectors.toList());
+        if (categoryDtoList == null) {
+            Objects.requireNonNull(categoryDtoList, "categoryDtoSet не может быть null");
+        } else if (!categoryDtoList.isEmpty()) {
+            return categoryDtoList;
         }
-        return categoryDtoSet;
+        return categoryDtoList;
     }
 
     private Calendar dateForFilter(Calendar date, String typeOfFilter) {
         switch (typeOfFilter) {
             case "Week":
                 date.add(Calendar.WEEK_OF_MONTH, -1);
-                System.out.println(date);
                 break;
             case "Month":
                 date.add(Calendar.MONTH, -1);

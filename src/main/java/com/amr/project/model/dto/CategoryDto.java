@@ -19,4 +19,6 @@ public class CategoryDto {
     private Long id;
     private String name;
     private List items;
+    private Long shopId;
+
 }

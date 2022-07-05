@@ -2,8 +2,8 @@ package com.amr.project.dao.abstracts;
 
 import com.amr.project.model.entity.Category;
 
-import java.util.Set;
+import java.util.List;
 
 public interface CategoryDao extends ReadWriteDao<Category,Long> {
-    public Set<Category> findAllCategoriesByShopId(Long shopId);
+    public List<Category> findAllCategoriesByShopId(Long shopId);
 }

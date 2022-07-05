@@ -49,6 +49,9 @@ public class Category {
     @ToString.Exclude
     private List<Item> items;
 
+    @Column(name = "shop_Id")
+    private Long shopId;
+
     public Category(String name) {
         this.name = name;
     }

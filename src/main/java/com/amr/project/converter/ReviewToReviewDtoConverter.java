@@ -2,9 +2,11 @@ package com.amr.project.converter;
 
 import com.amr.project.model.dto.ReviewDto;
 import com.amr.project.model.entity.Review;
+import lombok.experimental.UtilityClass;
 
 import java.time.ZoneId;
 
+@UtilityClass
 public class ReviewToReviewDtoConverter {
 
     public static ReviewDto convertReviewToReviewDto(Review review) {
@@ -21,7 +23,8 @@ public class ReviewToReviewDtoConverter {
                 (review.getItem() == null) ? null : review.getItem().getId(),
                 (review.getUser() == null) ? null : review.getUser().getId(),
                 (review.getUser() == null) ? null : review.getUser().getUsername(),
-                (review.getShop() == null) ? null : review.getShop().getId()
+                (review.getShop() == null) ? null : review.getShop().getId(),
+                review.isModerated()
         );
     }
 }

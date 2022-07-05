@@ -26,4 +26,5 @@ public class ItemDto {
     private String description;
     private List<ImageDto> images;
     private List<ReviewDto> reviews;
+    private boolean isModerated;
 }

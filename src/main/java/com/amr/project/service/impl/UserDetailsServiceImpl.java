@@ -15,15 +15,28 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserDao userDao;
     private User user;
 
+//    @Transactional
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User user = findUserByUsername(username);
+//        user.getAuthorities();
+//        return user;
+//    }
+
     @Transactional
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = findUserByEmail(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = findUserByUsername(username);
         user.getAuthorities();
         return user;
     }
-    public User findUserByEmail(String email) {
-        return userDao.findUserByEmail(email);
+
+//    public User findUserByEmail(String email) {
+//        return userDao.findUserByEmail(email);
+//    }
+
+    public User findUserByUsername(String username) {
+        return userDao.findUserByUsername(username);
     }
 
     public boolean isEnabled() {

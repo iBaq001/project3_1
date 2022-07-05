@@ -18,4 +18,13 @@ public class UserDaoImpl extends ReadWriteDaoImpl<User, Long> implements UserDao
                 .setParameter("email", email)
                 .getSingleResult();
     }
+
+    @Override
+    public User findUserByUsername(String username) {
+        TypedQuery<User> query = em.createQuery(
+                "select user from User user where user.username = :username", User.class);
+        return query
+                .setParameter("username", username)
+                .getSingleResult();
+    }
 }

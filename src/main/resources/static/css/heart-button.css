@@ -1,0 +1,15 @@
+.heart-container {
+    display: inline-block;
+}
+
+.far {
+
+}
+
+.fas {
+    color: red;
+}
+
+.heart {
+    cursor: pointer;
+}

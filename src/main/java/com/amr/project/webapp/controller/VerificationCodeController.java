@@ -44,14 +44,14 @@ public class VerificationCodeController {
 
     @RequestMapping(value = "/code", method = RequestMethod.POST)
     public ModelAndView registerUser(ModelAndView modelAndView, User user) throws UnsupportedEncodingException {
-        User userForQR = userRepository.findByEmail(user.getEmail());
+        User userForQR = userRepository.findByUsername(user.getUsername());
         if (userForQR == null) {
             modelAndView.addObject("message", "Для получения QR кода, введите логин и пароль");
             modelAndView.setViewName("verify_error");
         } else {
             userForQR.setSecret(Base32.random());
             userRepository.save(userForQR);
-            modelAndView.addObject("qr", generateQRUrl(userForQR.getSecret(), userForQR.getEmail()));
+            modelAndView.addObject("qr", generateQRUrl(userForQR.getSecret(), userForQR.getUsername()));
             modelAndView.setViewName("qrcode");
         }
 

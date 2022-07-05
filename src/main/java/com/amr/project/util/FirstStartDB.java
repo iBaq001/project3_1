@@ -635,6 +635,21 @@ public class FirstStartDB {
 //                .user(user3)
 //                .build();
 
+        Favorite favoriteModerator1 = Favorite.builder()
+                .user(moderator1)
+                .build();
+
+        Favorite favoriteAdmin1 = Favorite.builder()
+                .user(admin1)
+                .build();
+
+        Favorite favoriteAdmin2 = Favorite.builder()
+                .user(admin2)
+                .build();
+
+        Favorite favoriteUser3 = Favorite.builder()
+                .user(user3)
+                .build();
 
         Calendar date = Calendar.getInstance();
         date.add(Calendar.WEEK_OF_MONTH, 1);
@@ -698,8 +713,10 @@ public class FirstStartDB {
 
         firstStartDBDao.persist(moderator1);
 //        firstStartDBDao.persist(moderator1Info);
+        firstStartDBDao.persist(favoriteModerator1);
 
         firstStartDBDao.persist(admin1);
+        firstStartDBDao.persist(favoriteAdmin1);
 //        firstStartDBDao.persist(admin1Info);
         firstStartDBDao.persist(shop1);
 
@@ -709,6 +726,7 @@ public class FirstStartDB {
         firstStartDBDao.persist(item3);
 
         firstStartDBDao.persist(admin2);
+        firstStartDBDao.persist(favoriteAdmin2);
 //        firstStartDBDao.persist(admin2Info);
         firstStartDBDao.persist(shop2);
 
@@ -727,6 +745,8 @@ public class FirstStartDB {
 
         firstStartDBDao.persist(user3);
 //        firstStartDBDao.persist(user3Info);
+        firstStartDBDao.persist(favoriteUser3);
+
         firstStartDBDao.persist(cartItem1);
         firstStartDBDao.persist(cartItem3);
         firstStartDBDao.persist(cartItem2);

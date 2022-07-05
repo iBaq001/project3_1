@@ -22,23 +22,23 @@ public class OidcUserServiceImpl extends OidcUserService {
         OidcUser oidcUser = super.loadUser(userRequest);
         CustomOidcUser customOidcUser = new CustomOidcUser(oidcUser);
 
-        String email = oidcUser.getAttributes().get("email").toString();
-        User user = createUserIfNoExist(email, oidcUser);
+        String username = oidcUser.getAttributes().get("username").toString();
+        User user = createUserIfNoExist(username, oidcUser);
         customOidcUser.setUsername(user.getUsername());
         customOidcUser.setRole(user.getRole());
         return customOidcUser;
     }
 
-    public User createUserIfNoExist(String email, OidcUser oidcUser) {
-        User user = userDao.findUserByEmail(email);
+    public User createUserIfNoExist(String username, OidcUser oidcUser) {
+        User user = userDao.findUserByUsername(username);
 
         if (user == null) {
             user = User.builder()
                     .isUsing2FA(false)
                     .isIdentification(true)
                     .activate(true)
-                    .email(email)
-                    .username(email)
+                    .email(oidcUser.getEmail())
+                    .username(username)
                     .role(Roles.USER)
                     .build();
             userDao.persist(user);

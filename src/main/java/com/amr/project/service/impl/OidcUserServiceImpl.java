@@ -10,8 +10,10 @@ import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class OidcUserServiceImpl extends OidcUserService {
 
     @Autowired
@@ -29,8 +31,13 @@ public class OidcUserServiceImpl extends OidcUserService {
         return customOidcUser;
     }
 
+    @Transactional
     public User createUserIfNoExist(String username, OidcUser oidcUser) {
-        User user = userDao.findUserByUsername(username);
+        User user = null;
+
+        try {
+            user = userDao.findUserByUsername(username);
+        } catch (Exception nre){}
 
         if (user == null) {
             user = User.builder()
@@ -44,5 +51,6 @@ public class OidcUserServiceImpl extends OidcUserService {
             userDao.persist(user);
         }
         return user;
+
     }
 }

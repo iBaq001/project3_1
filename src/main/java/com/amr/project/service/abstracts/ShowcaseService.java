@@ -5,7 +5,6 @@ import com.amr.project.model.dto.ShopDto;
 import com.amr.project.model.entity.Category;
 import com.amr.project.model.entity.Shop;
 
-import java.util.Calendar;
 import java.util.List;
 
 public interface ShowcaseService {
@@ -22,9 +21,11 @@ public interface ShowcaseService {
 
     ShopDto getShopDtoById(Long id);
 
-    void addShop(Shop shop);
+    void addShop(ShopDto shopDto);
 
     ShopDto getShopDtoByName(String name);
 
     void removeShopById(Long id);
+
+    void updateShop(Long id, ShopDto shopDto);
 }

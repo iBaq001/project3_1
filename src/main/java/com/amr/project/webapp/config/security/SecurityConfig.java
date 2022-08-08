@@ -52,7 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public DaoAuthenticationProvider authProvider() {
-        final CustomAuthenticationProvider authProvider = new CustomAuthenticationProvider();
+//        final CustomAuthenticationProvider authProvider = new CustomAuthenticationProvider();
+        DaoAuthenticationProvider authProvider  = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
 //        authProvider.setPostAuthenticationChecks(differentLocationChecker);
@@ -65,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/user/**").hasAuthority("USER")
                 .antMatchers("/signup", "/confirm", "/code", "/confirm-account").permitAll()
 
                 .anyRequest()

@@ -15,13 +15,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserDao userDao;
     private User user;
 
-//    @Transactional
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        User user = findUserByUsername(username);
-//        user.getAuthorities();
-//        return user;
-//    }
 
     @Transactional
     @Override

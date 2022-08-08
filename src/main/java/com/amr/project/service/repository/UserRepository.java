@@ -1,7 +1,6 @@
 package com.amr.project.service.repository;
 
 import com.amr.project.model.entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Chat with ' + ${otherUser.getUsername()}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/chat.css}" href="../static/css/chat.css">
+</head>
+<body>
+
+<div class="container-fluid d-flex justify-content-center">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{/index}">На главную</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user}" th:text="${authUser.getUsername()}">User</a>
+                    <th:block id="authUserId" th:val="${authUser.getId()}"></th:block>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!--    <div class="page-content page-container" >-->
+    <!--        <div class="padding">-->
+    <div class="row container d-flex justify-content-center mx-0" id="page-content">
+        <div class="col-md-12 col-lg-8">
+            <div class="card card-bordered">
+                <div class="card-header">
+                    <h4 class="card-title" th:text="'Chat with ' + ${otherUser.getUsername()}"><strong>Chat</strong>
+                    </h4>
+                    <a class="btn btn-xs btn-primary" href="#" data-abc="true">Let's Chat App</a>
+                </div>
+
+
+                <div class="ps-container ps-theme-default ps-active-y" id="chat-content"
+                     style="overflow-y: scroll !important; height:400px !important;">
+                    <div class="media media-chat">
+                        <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png"
+                             alt="...">
+                        <div class="media-body">
+                            <p>Hi</p>
+                            <p>How are you ...???</p>
+                            <p>What are you doing tomorrow?<br> Can we come up a bar?</p>
+                            <p class="meta">
+                                <time datetime="2018">23:58</time>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="media media-meta-day">Today</div>
+
+                    <div class="media media-chat media-chat-reverse">
+                        <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-female.png"
+                             alt="...">
+                        <div class="media-body">
+                            <p>Hiii, I'm good.</p>
+                            <p>How are you doing?</p>
+                            <p>Long time no see! Tomorrow office. will be free on sunday.</p>
+                            <p class="meta">
+                                <time datetime="2018">00:06</time>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="media media-chat">
+                        <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png"
+                             alt="...">
+                        <div class="media-body">
+                            <p>Okay</p>
+                            <p>We will go on sunday? </p>
+                            <p class="meta">
+                                <time datetime="2018">00:07</time>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="media media-chat media-chat-reverse">
+                        <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-female.png"
+                             alt="...">
+                        <div class="media-body">
+                            <p>That's awesome!</p>
+                            <p>I will meet you Sandon Square sharp at 10 AM</p>
+                            <p>Is that okay?</p>
+                            <p class="meta">
+                                <time datetime="2018">00:09</time>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="media media-chat">
+                        <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png"
+                             alt="...">
+                        <div class="media-body">
+                            <p>Okay i will meet you on Sandon Square </p>
+                            <p class="meta">
+                                <time datetime="2018">00:10</time>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="media media-chat media-chat-reverse">
+                        <div class="media-body">
+                            <p>Do you have pictures of Matley Marriage?</p>
+                            <p class="meta">
+                                <time datetime="2018">00:10</time>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="media media-chat">
+                        <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png"
+                             alt="...">
+                        <div class="media-body">
+                            <p>Sorry I don't have. i changed my phone.</p>
+                            <p class="meta">
+                                <time datetime="2018">00:12</time>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="media media-chat media-chat-reverse">
+                        <div class="media-body">
+                            <p>Okay then see you on sunday!!</p>
+                            <p class="meta">
+                                <time datetime="2018">00:12</time>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
+                        <div class="ps-scrollbar-x" tabindex="0" style="left: 0; width: 0;"></div>
+                    </div>
+                    <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;">
+                        <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
+                    </div>
+                </div>
+
+                <div class="publisher bt-1 border-light d-flex justify-content-between">
+                    <img class="avatar avatar-xs" src="https://img.icons8.com/color/36/000000/administrator-male.png"
+                         alt="...">
+                    <label>
+                        <input class="publisher-input" type="text" placeholder="Write something">
+                    </label>
+                    <button class="btn btn-success" type="submit">Send</button>
+<!--                    <span class="publisher-btn file-group">-->
+<!--                        <i class="fa fa-paperclip file-browser"></i>-->
+<!--                        <input type="file">-->
+<!--                    </span>-->
+                    <a class="publisher-btn" href="#" data-abc="true"><i class="fa fa-smile"></i></a>
+                    <a class="publisher-btn text-info" href="#" data-abc="true"><i class="fa fa-paper-plane"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--        </div>-->
+    <!--    </div>-->
+</div>
+
+<div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script th:src="@{/js/chat.js}"></script>
+</body>
+</html>

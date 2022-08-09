@@ -31,6 +31,7 @@ public class ShopDaoImpl extends ReadWriteDaoImpl<Shop, Long> implements ShopDao
 //        em.persist(shop);
 //    }
 
+    @Override
     public List<Shop> getBestRatingShops(int limit) {
         return em.createQuery("SELECT shop FROM Shop shop ORDER BY shop.rating DESC", Shop.class)
                 .setMaxResults(limit)

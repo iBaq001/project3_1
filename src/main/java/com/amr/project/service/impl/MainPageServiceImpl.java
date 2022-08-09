@@ -6,13 +6,10 @@ import com.amr.project.dao.abstracts.ItemDao;
 import com.amr.project.dao.abstracts.ShopDao;
 import com.amr.project.model.dto.ItemForShowcaseDto;
 import com.amr.project.model.dto.ShopDto;
-import com.amr.project.model.entity.Item;
-import com.amr.project.model.entity.Shop;
 import com.amr.project.service.abstracts.MainPageService;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,22 +25,18 @@ public class MainPageServiceImpl implements MainPageService {
     }
 
     @Override
-    public Set<ItemForShowcaseDto> getBestRatingItems() {
-        return itemDao.findAll()
+    public List<ItemForShowcaseDto> getBestRatingItems(int limit) {
+        return itemDao.getBestRatingItems(limit)
                 .stream()
-                .sorted(Comparator.comparingDouble(Item::getRating))
-                .limit(12)
                 .map(ItemToItemForShowcaseDtoConverter::convertItemToItemForShowcaseDto)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Set<ShopDto> getBestRatingShops() {
-        return shopDao.findAll()
+    public List<ShopDto> getBestRatingShops(int limit) {
+        return shopDao.getBestRatingShops(limit)
                 .stream()
-                .sorted(Comparator.comparingDouble(Shop::getRating))
-                .limit(12)
                 .map(ShopToShopDtoConverter::convertShopToShopDto)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

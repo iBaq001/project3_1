@@ -25,6 +25,7 @@ public class ItemDaoImpl extends ReadWriteDaoImpl<Item, Long> implements ItemDao
                 .getResultList();
     }
 
+    @Override
     public List<Item> getBestRatingItems(int limit) {
         return em.createQuery("SELECT item FROM Item item ORDER BY item.rating DESC", Item.class)
                 .setMaxResults(limit)

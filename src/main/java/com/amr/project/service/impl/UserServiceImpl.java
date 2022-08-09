@@ -38,6 +38,11 @@ public class UserServiceImpl implements UserService {
         userDao.update(user);
     }
 
+    @Override
+    public User findUserByEmail(String email) {
+        return userDao.findUserByEmail(email);
+    }
+
     @Transactional
     @Override
     public void deleteById(Long id) {

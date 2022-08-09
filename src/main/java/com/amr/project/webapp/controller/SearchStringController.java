@@ -25,7 +25,7 @@ public class SearchStringController {
         List<ShopDto> shopDto = shopService.getShopByName(name);
         return  shopDto != null && !shopDto.isEmpty()
                 ? ResponseEntity.ok(shopDto)
-                : ResponseEntity.ok().body(HttpStatus.NOT_FOUND);
+                : ResponseEntity.noContent().build();
     }
     @GetMapping(value = "/itemList/{name}")
     public ResponseEntity<?> getItemByName(@PathVariable String name) {

@@ -13,6 +13,8 @@ public interface ShopMapper {
 
     ShopDto shopToShopDto(Shop shop);
 
+    Shop createShopDtoToShop(ShopDto shopDto);
+
     default ImageDto imageMap(Image image){
         return ImageToImageDtoConverter.convertImageToImageDto(image);
     }

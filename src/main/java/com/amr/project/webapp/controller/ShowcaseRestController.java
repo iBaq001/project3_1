@@ -7,6 +7,8 @@ import com.amr.project.model.entity.User;
 import com.amr.project.service.abstracts.CartItemService;
 import com.amr.project.service.abstracts.FavoriteService;
 import com.amr.project.service.abstracts.ShowcaseService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,19 +37,26 @@ public class ShowcaseRestController {
 
     @GetMapping("/shop/{id}")
     public ShopDto getShopDtoById(@PathVariable Long id) {
-
         return showcaseService.getShopDtoById(id);
     }
 
     @PostMapping("/shop/{id}")
-    public ShopDto addShop(@RequestBody Shop shop){
-        showcaseService.addShop(shop);
-        return showcaseService.getShopDtoByName(shop.getName());
+    public ResponseEntity<Void> addShop(@RequestBody ShopDto shopDto){
+        showcaseService.addShop(shopDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping("/shop/{id}")
-    public void deleteShop(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteShop(@PathVariable("id") Long id) {
         showcaseService.removeShopById(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PutMapping("/shop/{id}")
+    public ResponseEntity<Void> updateShop(@PathVariable Long id, @RequestBody ShopDto shopDto) {
+        showcaseService.updateShop(id, shopDto);
+        return ResponseEntity.status(HttpStatus.OK).build();
+
     }
 
     @GetMapping("/shop/id/{shopId}")

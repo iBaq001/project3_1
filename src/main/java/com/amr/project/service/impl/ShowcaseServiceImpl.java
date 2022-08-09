@@ -4,6 +4,8 @@ import com.amr.project.converter.ItemToItemForShowcaseDtoConverter;
 import com.amr.project.converter.ShopToShopDtoConverter;
 import com.amr.project.dao.abstracts.ItemDao;
 import com.amr.project.dao.abstracts.ShopDao;
+import com.amr.project.exception.ResourceNotFoundException;
+import com.amr.project.mapper.ShopMapper;
 import com.amr.project.model.dto.ItemForShowcaseDto;
 import com.amr.project.model.dto.ShopDto;
 import com.amr.project.model.entity.Category;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +25,8 @@ import java.util.stream.Collectors;
 public class ShowcaseServiceImpl implements ShowcaseService {
     ItemDao itemDao;
     ShopDao shopDao;
+    ShopMapper shopMapper;
+
 
     public ShowcaseServiceImpl() {
     }
@@ -66,8 +71,8 @@ public class ShowcaseServiceImpl implements ShowcaseService {
     }
 
     @Override
-    public void addShop(Shop shop) {
-        shopDao.update(shop);
+    public void addShop(ShopDto shopDto) {
+        shopDao.persist(shopMapper.createShopDtoToShop(shopDto));
     }
 
     @Override
@@ -77,8 +82,26 @@ public class ShowcaseServiceImpl implements ShowcaseService {
 
     @Override
     public void removeShopById(Long id) {
-        shopDao.delete(findById(id));
+        Shop deletingShop = shopDao.findById(id);
+        if(Objects.nonNull(deletingShop)) {
+            shopDao.delete(findById(id));
+        } else {
+            throw new ResourceNotFoundException(String.format("Resource with id: %d", id));
+        }
     }
 
+    @Override
+    public void updateShop(Long id, ShopDto shopDto) {
+        Shop updatingShop = shopDao.findById(id);
 
+        if (Objects.nonNull(updatingShop)) {
+            updatingShop.setName(shopDto.getName());
+            updatingShop.setDescription(shopDto.getDescription());
+            updatingShop.setEmail(shopDto.getEmail());
+            updatingShop.setPhone(shopDto.getPhone());
+            shopDao.persist(updatingShop);
+        } else {
+            throw new ResourceNotFoundException(String.format("Resource with id: %d", id));
+        }
+    }
 }

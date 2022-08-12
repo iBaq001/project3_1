@@ -23,8 +23,13 @@ public class UserDaoImpl extends ReadWriteDaoImpl<User, Long> implements UserDao
     public User findUserByUsername(String username) {
         TypedQuery<User> query = em.createQuery(
                 "select user from User user where user.username = :username", User.class);
-        return query
-                .setParameter("username", username)
-                .getSingleResult();
+        try{
+            User user = query.setParameter("username", username).getSingleResult();
+            return user;
+        } catch (Exception e){
+            return null;
+        }
+
+
     }
 }

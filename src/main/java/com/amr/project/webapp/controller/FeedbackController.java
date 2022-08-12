@@ -1,54 +1,43 @@
 package com.amr.project.webapp.controller;
 
-import com.amr.project.model.dto.FeedbackDto;
+import com.amr.project.model.entity.Feedback;
 import com.amr.project.model.entity.User;
 import com.amr.project.service.abstracts.FeedbackService;
-import com.amr.project.service.abstracts.ItemService;
-import com.amr.project.service.abstracts.ShopService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
+import com.amr.project.service.abstracts.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import java.security.Principal;
 
-@RestController
-@RequestMapping("/api/feedback/")
-@RequiredArgsConstructor
+@Controller
+@RequestMapping("/feedback_service")
 public class FeedbackController {
 
-    final FeedbackService feedbackService;
+    private UserService userService;
+    private FeedbackService feedbackService;
+
+
+    @Autowired
+    public FeedbackController(UserService userService, FeedbackService feedbackService) {
+        this.feedbackService = feedbackService;
+        this.userService = userService;
+    }
 
     @GetMapping
-    public ResponseEntity<List<FeedbackDto>> getAllFeedback() {
-        List<FeedbackDto> feedbackDtos = feedbackService.findAllFeedbackDto();
-        return feedbackDtos !=null ? new ResponseEntity<>(feedbackDtos, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public String show(@ModelAttribute("feedback") Feedback feedback) {
+        return "feedback_service";
     }
-    @GetMapping( "/{id}")
-    public ResponseEntity<FeedbackDto> feedbackById(@PathVariable Long id) {
-        FeedbackDto feedbackDtos = feedbackService.getFeedbackDtoById(id);
-        return ResponseEntity.ok(feedbackDtos);
-    }
+
     @PostMapping
-    public ResponseEntity<String> saveNewFeedback(@RequestBody FeedbackDto feedbackDto,
-                                                  @AuthenticationPrincipal User user) {
-        feedbackService.persist(feedbackDto, user);
-        return new ResponseEntity<>("Feedback saved", HttpStatus.OK);
+    public String addFeedback(@ModelAttribute("feedback") Feedback feedback, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        feedback.setUsername(principal.getName());
+        feedback.setUser(user);
+        feedbackService.persist(feedback);
+        return "redirect:/";
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteFeedbackById(@PathVariable Long id) {
-        feedbackService.deleteFeedback(id);
-        return feedbackService.existsById(id)
-                ? new ResponseEntity<>("unsucces delete", HttpStatus.BAD_REQUEST)
-                : new ResponseEntity<>("deleted succes", HttpStatus.OK);
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<FeedbackDto> updateFeedback(@PathVariable Long id,
-                                           @RequestBody FeedbackDto feedbackDto) {
-        feedbackService.updateFeedback(id, feedbackDto);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
 }

@@ -7,6 +7,7 @@ import com.amr.project.dao.abstracts.ShopDao;
 import com.amr.project.model.dto.ItemForShowcaseDto;
 import com.amr.project.model.dto.ShopDto;
 import com.amr.project.service.abstracts.MainPageService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

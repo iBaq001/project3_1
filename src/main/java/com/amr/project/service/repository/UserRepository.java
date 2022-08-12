@@ -17,6 +17,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
 	@Query("SELECT u FROM User u WHERE u.secret = ?1")
 	User findBySecret(String secret);
-//
+
 }
 

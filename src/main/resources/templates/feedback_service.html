@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<h1 align="center">Ваше мнение важно для нас!</h1>
+<p>Заполните форму для того, чтобы мы учли ваши пожелания:</p>
+<form th:method = "POST" th:action="@{/feedback_service}" th:object = "${feedback}">
+    <p>Ваш причина вашего обращения:</p>
+    <th><input type="text" th:field = "*{reason}"/></th>
+    <p>Ваши пожелания:</p>
+    <th><input size="100" type="text" th:field = "*{fullText}"/></th>
+    <br>
+    <input type="submit" value="Отправить!"/>
+</form>
+
+</body>
+</html>

@@ -1,5 +1,7 @@
 package com.amr.project.model.dto;
 
+import com.amr.project.model.entity.Address;
+import com.amr.project.model.entity.Image;
 import com.amr.project.model.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;

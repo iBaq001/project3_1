@@ -28,8 +28,8 @@ public class MainPageController {
         } else {
             model.addAttribute("favorite", null);
         }
-        model.addAttribute("bestRatingShops", mainPageService.getBestRatingShops());
-        model.addAttribute("bestRatingItems", mainPageService.getBestRatingItems());
+        model.addAttribute("bestRatingShops", mainPageService.getBestRatingShops(12));
+        model.addAttribute("bestRatingItems", mainPageService.getBestRatingItems(12));
         return "index";
     }
 }

@@ -30,14 +30,16 @@ public abstract class UserMapper {
 
     abstract public List<UserDto> toUserDtos(List<User> users);
 
-    abstract public User toUser(UserDto userDto);
+    @Mapping(source = "addresses", target = "address")
+    @Mapping(source = "image", target = "images")
+    @Mapping(source = "couponIds", target = "coupons")
+    abstract public User userDtoToUser(UserDto userDto);
 
 
     @Mapping(source = "address", target = "addresses")
     @Mapping(source = "images", target = "image")
     @Mapping(source = "coupons", target = "couponIds")
     public abstract UserDto userToUserDto(User user);
-
 
 
     // вспомогательные методы

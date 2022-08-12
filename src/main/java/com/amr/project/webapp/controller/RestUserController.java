@@ -26,7 +26,7 @@ public class RestUserController {
 
     @PostMapping
     public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
-        userService.persist(userMapper.toUser(userDto));
+        userService.persist(userMapper.userDtoToUser(userDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(userDto);
     }
 
@@ -38,7 +38,7 @@ public class RestUserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody UserDto userDto) {
-        User user = userMapper.toUser(userDto);
+        User user = userMapper.userDtoToUser(userDto);
         user.setId(id);
         userService.update(user);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userDto);

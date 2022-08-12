@@ -14,8 +14,11 @@
             <button class="btn btn-primary btn-add-to-cart"
                     th:data-item-id="${itemId}" data-quantity="1">В корзину
             </button>
+            <a class="btn btn-primary btn" th:href="@{/items/{id}(id=${itemId})}" role="button">Информация о товаре</a>
+
             <div class="heart-container"  th:if="${isFavorite != null}">
                 <i class="fa-heart js-heart heart fa-2x" th:data-item-id="${itemId}" th:classappend="${ isFavorite >= 0 ? 'fas' : 'far'}" id="item-heart"></i>
+
             </div>
         </div>
     </div>

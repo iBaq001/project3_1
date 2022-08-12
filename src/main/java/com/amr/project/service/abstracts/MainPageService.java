@@ -2,6 +2,7 @@ package com.amr.project.service.abstracts;
 
 import com.amr.project.model.dto.ItemForShowcaseDto;
 import com.amr.project.model.dto.ShopDto;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 

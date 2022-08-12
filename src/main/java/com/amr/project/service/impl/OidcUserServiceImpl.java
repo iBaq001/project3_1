@@ -24,7 +24,7 @@ public class OidcUserServiceImpl extends OidcUserService {
         OidcUser oidcUser = super.loadUser(userRequest);
         CustomOidcUser customOidcUser = new CustomOidcUser(oidcUser);
 
-        String username = oidcUser.getAttributes().get("username").toString();
+        String username = oidcUser.getAttributes().get("name").toString();
         User user = createUserIfNoExist(username, oidcUser);
         customOidcUser.setUsername(user.getUsername());
         customOidcUser.setRole(user.getRole());

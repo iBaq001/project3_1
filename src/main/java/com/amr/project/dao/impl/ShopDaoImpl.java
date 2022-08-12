@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public class ShopDaoImpl extends ReadWriteDaoImpl<Shop, Long> implements ShopDao {
 
+
     @Override
     public Shop findShopByName(String name) {
         TypedQuery<Shop> query = em.createQuery(

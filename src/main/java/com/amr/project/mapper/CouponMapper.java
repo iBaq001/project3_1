@@ -9,5 +9,10 @@ public abstract class CouponMapper {
     Long couponToLong(Coupon coupon) {
         return coupon.getId();
     }
+    Coupon couponIdToCoupon (Long id){
+        Coupon coupon =  new Coupon();
+        coupon.setId(id);
+        return coupon;
+    }
 
 }

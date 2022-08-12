@@ -28,7 +28,7 @@ import java.util.Objects;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
@@ -67,11 +67,7 @@ public class Review {
     private boolean isModerateAccept;
     private String moderatedRejectReason;
 
-    public Review(String text, int rating, Shop shop) {
-        this.text = text;
-        this.rating = rating;
-        this.shop = shop;
-    }
+
 
     @Override
     public boolean equals(Object o) {

@@ -48,4 +48,12 @@ public class UserServiceImpl implements UserService {
     public void deleteById(Long id) {
         userDao.deleteByIdCascadeIgnore(id);
     }
+    @Override
+    public User findByUsername (String username){
+       return userDao.findUserByUsername(username);
+    }
+    @Override
+    public User findByEmail (String email){
+        return userDao.findUserByEmail(email);
+    }
 }

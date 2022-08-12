@@ -2,10 +2,13 @@ package com.amr.project.webapp.controller;
 
 import com.amr.project.mapper.ItemMapper;
 import com.amr.project.model.dto.CartItemDto;
+import com.amr.project.model.entity.User;
 import com.amr.project.service.abstracts.CartItemService;
 import com.amr.project.service.abstracts.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController

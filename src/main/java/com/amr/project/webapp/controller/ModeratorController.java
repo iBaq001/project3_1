@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/moderator/")
 @RequiredArgsConstructor
 public class ModeratorController {
-    private final ItemController itemController;
+    private final RestItemController itemController;
     private final ShowcaseRestController showcaseRestController;
     private final ReviewController reviewController;
 

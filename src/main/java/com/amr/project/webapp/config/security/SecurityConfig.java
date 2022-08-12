@@ -52,7 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public DaoAuthenticationProvider authProvider() {
-        final CustomAuthenticationProvider authProvider = new CustomAuthenticationProvider();
+        //final CustomAuthenticationProvider authProvider = new CustomAuthenticationProvider();
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
 //        authProvider.setPostAuthenticationChecks(differentLocationChecker);
@@ -65,6 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/user/**").hasAnyAuthority("USER","ADMIN")
+                .antMatchers("/feedback_service/**").authenticated()
                 .antMatchers("/signup", "/confirm", "/code", "/confirm-account").permitAll()
 
                 .anyRequest()
@@ -74,9 +77,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //логин с кастомным Auth provider (для 2FA)
                 .formLogin().
-                loginPage("/login").permitAll().
-                loginProcessingUrl("/login")
-                .defaultSuccessUrl("/")
+                loginPage("/login")
+                .loginProcessingUrl("/login")
+                .successHandler(successUserHandler)
+               // .defaultSuccessUrl("/")
                 .authenticationDetailsSource(authenticationDetailsSource)
 
                 .and()
@@ -100,6 +104,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public OidcUserService oidcUserService() {
         return new OidcUserServiceImpl();
     }
-
-
 }

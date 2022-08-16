@@ -1,18 +1,21 @@
 package com.amr.project.webapp.controller;
 
 import com.amr.project.converter.ItemToItemForShowcaseDtoConverter;
+import com.amr.project.model.dto.ItemDtoRequest;
 import com.amr.project.model.dto.ItemForShowcaseDto;
 import com.amr.project.model.dto.ReviewDto;
 import com.amr.project.model.entity.Item;
 import com.amr.project.model.entity.Review;
 import com.amr.project.model.entity.Shop;
 import com.amr.project.model.entity.User;
+import com.amr.project.model.enums.Roles;
 import com.amr.project.service.abstracts.ItemService;
 import com.amr.project.service.abstracts.ReviewService;
 import com.amr.project.service.abstracts.UserService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +53,41 @@ public class ItemController {
         return "itemInfo";
     }
 
+    @DeleteMapping("/{id}")
+    public String deleteItem(@PathVariable("id") long id, @AuthenticationPrincipal User user) {
+        try {
+            if (user.getRole() == Roles.ADMIN || user.getRole() == Roles.MODERATOR) {
+                itemService.deleteItem(id);
+            }
+        } catch (NullPointerException e) {
+            return "Ошибка доступа";
+        } finally {
+            return "redirect:/";
+        }
+    }
+    @GetMapping("/{id}/edit")
+    public String editItem(Model model, @PathVariable("id") long id) {
+        Item editItem = itemService.getItemById(id);
+        model.addAttribute("item", editItem);
+        return "editItem";
+    }
+    @PatchMapping("{id}")
+    public String updateItem(ItemDtoRequest itemDtoRequest,
+                             @PathVariable("id") Long id) {
+        itemService.updateItem(id, itemDtoRequest);
+        return "redirect:/";
+    }
+    @GetMapping("/newItem")
+    public String newItem(Model model) {
+        model.addAttribute("item", new Item());
+        return "newItem";
+    }
+    @PostMapping
+    public String createItem(ItemDtoRequest itemDtoRequest) {
+        itemService.addItem(itemDtoRequest);
+        return "redirect:/";
+    }
+
     @PostMapping("/{id}")
     public String createNewReview(@PathVariable("id") Long id,
                                   Principal principal,
@@ -72,4 +110,5 @@ public class ItemController {
 //            reviewService.persist(review);
         return "redirect:/items/" + id;
     }
+
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h>Создание товара</h>
+<form class="row g-3"  th:action="@{/items}" th:object="${item}" th:method="POST">
+    <span>Наименование</span>
+    <br>
+    <input type="text" th:field="${item.name}"/>
+    <br>
+    <span>Цена</span>
+    <br>
+    <input type="number" th:field="${item.basePrice}"/>
+    <br>
+    <span>Базовая цена</span>
+    <br>
+    <input type="number" th:field="${item.basePrice}"/>
+    <br>
+    <span>Количество</span>
+    <br>
+    <input type="number" th:field="${item.count}"/>
+    <br>
+    <span>Скидка</span>
+    <br>
+    <input type="number" th:field="${item.rating}"/>
+    <br>
+    <span>Описание</span>
+    <br>
+    <input type="text" th:field="${item.description}"/>
+    <br>
+
+    <input class="button" type="submit" value="Создать">
+</form>
+
+</body>
+</html>

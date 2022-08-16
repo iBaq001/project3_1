@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form class="row g-3" th:method="Patch" th:action="@{/items/{id}(id=${item.getId()})}" th:object="${item}">
+<label for="id" class="font-weight-bold">ID<input class="form-control"type="text" id="id" th:value="*{id}" disabled></label>
+<h1></h1>
+<label th:for="basePrice" >Base Price<input class="form-control" type="number" name="basePrice" th:value="*{basePrice}" required></label>
+<h1></h1>
+<label th:for="count">Count<input class="form-control" type="number" name="count" th:value="*{count}" required></label>
+<h1></h1>
+<label th:for="name" >Name<input class="form-control" type="text" name="name" th:value="*{name}" required></label>
+<h1></h1>
+<label th:for="price" >Price<input class="form-control" type="number" name="price" th:value="*{price}" required></label>
+<h1></h1>
+<label th:for="rating" >Rating<input class="form-control" type="number" name="rating" th:value="*{rating}" required></label>
+<h1></h1>
+<label th:for="description" >Description<input class="form-control" type="text" name="description" th:value="*{description}" required></label>
+<h1></h1>
+<input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

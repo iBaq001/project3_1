@@ -28,6 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final SuccessUserHandler successUserHandler;
+
+    private final LogoutSuccess logoutSuccess;
+
     @Autowired
     private CustomWebAuthenticationDetailsSource authenticationDetailsSource;
 
@@ -66,6 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/user/**").hasAnyAuthority("USER","ADMIN")
                 .antMatchers("/feedback_service/**").authenticated()
                 .antMatchers("/signup", "/confirm", "/code", "/confirm-account").permitAll()
@@ -77,16 +81,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //логин с кастомным Auth provider (для 2FA)
                 .formLogin().
-                loginPage("/login")
-                .loginProcessingUrl("/login")
+                loginPage("/login").permitAll().
+                loginProcessingUrl("/login")
                 .successHandler(successUserHandler)
-               // .defaultSuccessUrl("/")
-                .authenticationDetailsSource(authenticationDetailsSource)
+//                .defaultSuccessUrl("/")
+//                .authenticationDetailsSource(authenticationDetailsSource)
 
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/login").logoutSuccessHandler(logoutSuccess)
                 .and()
                 .oauth2Login()
                 .loginPage("/login")
@@ -104,4 +108,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public OidcUserService oidcUserService() {
         return new OidcUserServiceImpl();
     }
+
+
 }

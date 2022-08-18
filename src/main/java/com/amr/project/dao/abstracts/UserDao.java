@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 public interface UserDao extends ReadWriteDao<User, Long> {
     User findUserByEmail(String email);
     User findUserByUsername(String username);
+
+    User findByActivationCode(String activationCode);
 }

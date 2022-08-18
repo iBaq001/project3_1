@@ -39,6 +39,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByUserName(String name) {
+        return userDao.findUserByUsername(name);
+    }
+
+
     public User findUserByEmail(String email) {
         return userDao.findUserByEmail(email);
     }
@@ -47,13 +52,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Long id) {
         userDao.deleteByIdCascadeIgnore(id);
-    }
-    @Override
-    public User findByUsername (String username){
-       return userDao.findUserByUsername(username);
-    }
-    @Override
-    public User findByEmail (String email){
-        return userDao.findUserByEmail(email);
     }
 }

@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 @Data
 public class ItemDtoRequest {
     private String name;
-    private BigDecimal basePrice;
-    private BigDecimal price;
+    private Long basePrice;
+    private Long price;
     private int count;
     private double rating;
     private String description;

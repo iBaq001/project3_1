@@ -45,7 +45,7 @@ public class CartItemServiceImpl extends ReadWriteServiceImpl<CartItem, Long> im
 
 
     // метод возвращает список элементов корзины по текущему юзеру установленному в поле currentUser
-    private List<CartItem> getListOfCartItems(User user) {
+    public List<CartItem> getListOfCartItems(User user) {
         if (user == null) {
             return new ArrayList<CartItem>();
         } else {
@@ -55,6 +55,7 @@ public class CartItemServiceImpl extends ReadWriteServiceImpl<CartItem, Long> im
 
 
     // метод возвращает список элементов корзины по !текущему! юзеру установленному в поле currentUser
+
     @Override
     public List<CartItemDto> getListOfCartItemDTOs() {
         return getListOfCartItems(currentUser).stream().map(cartItemMapper::cartItemToCartItemDto).collect(Collectors.toList());
@@ -74,6 +75,7 @@ public class CartItemServiceImpl extends ReadWriteServiceImpl<CartItem, Long> im
     @Override
     @Transactional
     public void addItemToCart(Long itemId, Long shopId, int quantity) {
+
         if (currentUser == null) {
             setUser(null);
         }
@@ -100,6 +102,7 @@ public class CartItemServiceImpl extends ReadWriteServiceImpl<CartItem, Long> im
             cartItem.setUser(newUser);
             cartItemDao.update(cartItem);
         });
+        userService.deleteById(oldUser.getId());
     }
 
     //метод ищет строки с одним и тем же товаром и магазином, и объединяет их
@@ -131,31 +134,38 @@ public class CartItemServiceImpl extends ReadWriteServiceImpl<CartItem, Long> im
         } else if (cartItem.getUser().getId() == currentUser.getId()) cartItemDao.delete(cartItem);
     }
 
+    @Override
+    public String getCartItemName(Long itemId) {
+
+        return itemService.getItemById(itemId).getName();
+    }
+
 
     // метод устанавливает временного пользователя для возможности добавления товаров в корзину неаутентифицированным пользователем
     @Override
-    @Transactional
     public void setUser(User loggedUser) {
-        // Cоздаем временного пользователя если нет авторизации
-        if (currentUser == null && loggedUser == null) {
+        if ( loggedUser == null && currentUser == null) {
             currentUser = User.builder()
                     .role(Roles.ANONYMOUS)
                     .build();
             userService.persist(currentUser);
-        //Если пользователь сразу залогинился и корзина еще пустая
-        } else if (currentUser == null && loggedUser != null) {
-            currentUser = loggedUser;
-        //Если текущий пользователь совпадает с авторизацией, то ничего не делаем
-        } else if (currentUser == loggedUser) {
-            return;
-        /*Далее момент когда анонимный пользователь (вероятно в корзине уже лежат покупки) переключается на
-        зарегистрированного. Меняем пользователя в классе и в списке позиций его корзины*/
         } else if (loggedUser != null && currentUser != loggedUser) {
             changeUserInCartItems(currentUser, loggedUser); //меняем юзера на loggedUser в строках корзины временного currentUser
             joinSameCartItems(loggedUser);
             currentUser = loggedUser;
+        } else {
+            currentUser = loggedUser;
         }
+
     }
+
+    @Override
+    public void updateQuantity(CartItemDto cartItemDto) {
+        CartItem cartItem = cartItemDao.findById(cartItemDto.getId());
+        cartItem.setQuantity(cartItemDto.getQuantity());
+        cartItemDao.update(cartItem);
+    }
+
 
     //Дальше методы-прослойки для тестирования
 

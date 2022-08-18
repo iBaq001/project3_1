@@ -10,7 +10,7 @@ import java.nio.file.Files;
 
 @Component
 public class ImagesToByteArrayConverter {
-private final String path = "classpath:static/images/";
+    private final String path = "classpath:static/images/";
 
     public byte[] getBiteArrayImage(String name) throws IOException {
         File fileImage = ResourceUtils.getFile(path + name);

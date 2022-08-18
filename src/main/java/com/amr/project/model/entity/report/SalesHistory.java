@@ -35,8 +35,8 @@ public class SalesHistory {
     private Long id;
     private Calendar orderDate;     //Дата продажи товара
     private int count;              //Кол-во проданного товара в этот день
-    private BigDecimal basePrice;   //Себестоимость товара ("= basePrice" в таблице "item")
-    private BigDecimal price;       //Цена проданного товара в этот день ("= price" в таблице "item)
+    private Long basePrice;   //Себестоимость товара ("= basePrice" в таблице "item")
+    private Long price;       //Цена проданного товара в этот день ("= price" в таблице "item)
 
 
     @ManyToOne(fetch = FetchType.LAZY)

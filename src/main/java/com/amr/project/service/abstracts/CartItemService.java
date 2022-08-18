@@ -9,12 +9,14 @@ import java.util.List;
 public interface CartItemService extends ReadWriteService<CartItem, Long> {
 
     void addItemToCart(Long itemId, Long shopId, int quantity);
-
     List<CartItemDto> getListOfCartItemDTOs();
 
     public void setUser(User loggedUser);
 
-    public void updateQuantityInCart(List<CartItemDto> cartItemDtoList);
+    public void updateQuantity(CartItemDto cartItemDto);
 
-    public void deleteCartItem(Long cartItemId);
+//    void updateQuantityInCart(Long id, int quantity);
+    void deleteCartItem(Long cartItemId);
+
+    String getCartItemName(Long itemId);
 }

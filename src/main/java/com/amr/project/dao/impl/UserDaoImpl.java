@@ -14,9 +14,14 @@ public class UserDaoImpl extends ReadWriteDaoImpl<User, Long> implements UserDao
     public User findUserByEmail(String email) {
         TypedQuery<User> query = em.createQuery(
                 "select user from User user where user.email = :email", User.class);
-        return query
-                .setParameter("email", email)
-                .getSingleResult();
+
+        try{
+            query.setParameter("email", email);
+            return query
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
@@ -32,4 +37,17 @@ public class UserDaoImpl extends ReadWriteDaoImpl<User, Long> implements UserDao
 
 
     }
+
+    @Override
+    public User findByActivationCode(String activationCode) {
+        TypedQuery<User> query = em.createQuery(
+                "SELECT u FROM User u WHERE u.activationCode = :activationCode", User.class);
+
+        return query
+                .setParameter("activationCode", activationCode)
+                .getSingleResult();
+
+    }
+
+
 }

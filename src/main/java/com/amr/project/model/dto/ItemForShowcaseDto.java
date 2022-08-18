@@ -20,8 +20,8 @@ public class ItemForShowcaseDto {
     private Long id;
     private String name;
     private String description;
-    private BigDecimal basePrice;
-    private BigDecimal price;
+    private Long basePrice;
+    private Long price;
     private int count;
     private ImageDto imageDto;
     private ShopDto shopDto;

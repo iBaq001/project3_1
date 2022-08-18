@@ -7,11 +7,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
+
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
@@ -34,11 +35,13 @@ public class ReadWriteDaoImpl<T, K> implements ReadWriteDao<T, K> {
     public void persist(T entity) {
         em.persist(entity);
     }
+
     @Transactional
     @Override
     public void update(T entity) {
         em.merge(entity);
     }
+
     @Transactional
     @Override
     public void delete(T entity) {
@@ -62,15 +65,15 @@ public class ReadWriteDaoImpl<T, K> implements ReadWriteDao<T, K> {
         return em.find(clazz, id) != null;
     }
 
+
     @Override
     public T findById(K id) {
         return em.find(clazz, id);
     }
 
-        @Override
+    @Override
     public List<T> findAll() {
         return em.createQuery("select u from " + clazz.getName() + " u", clazz)
                 .getResultList();
     }
-
 }

@@ -38,6 +38,7 @@ public abstract class UserMapper {
     public abstract UserDto userToUserDto(User user);
 
 
+
     // вспомогательные методы
     List<AddressDto> addressMap(Address value) {
         List<AddressDto> result = new ArrayList<>();

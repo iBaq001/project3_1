@@ -40,10 +40,10 @@ public class Item {
     private String name;
 
     @Column(name = "base_price")
-    private BigDecimal basePrice;
+    private Long basePrice;
 
     @Column(name = "price")
-    private BigDecimal price;
+    private Long price;
 
     @Column(name = "count")
     private int count; //Вероятно это ненужное поле. Количество товара в корзине хранится в CartItem
@@ -132,7 +132,7 @@ public class Item {
     private String moderatedRejectReason;
     private boolean isPretendedToBeDeleted;
 
-    public Item (String name, BigDecimal price, int count, double rating, String description, Category category, Shop shop) {
+    public Item (String name, Long price, int count, double rating, String description, Category category, Shop shop) {
         this.name = name;
         this.price = price;
         this.count = count;

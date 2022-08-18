@@ -74,4 +74,7 @@ public class FavoriteRestController {
         }
         return ResponseEntity.status(HttpStatus.OK).body("{\"success\":1}");
     }
+
+
+
 }

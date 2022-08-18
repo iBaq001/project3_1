@@ -249,7 +249,7 @@ public class FirstStartDB {
         item1Images.add(item1image1);
 
         Item item1 = Item.builder()
-                .basePrice(BigDecimal.valueOf(30L))
+                .basePrice(30L)
                 .count(29)
                 .description("Пиво пенное, разливное, обалденное")
                 .discount(15)
@@ -257,7 +257,7 @@ public class FirstStartDB {
                 .isModerated(true)
                 .isPretendedToBeDeleted(false)
                 .name("Хадыженское")
-                .price(BigDecimal.valueOf(100L))
+                .price(100L)
                 .rating(9.5)
 //                .cartItem(cartItem1)
                 .category(category1)
@@ -275,7 +275,7 @@ public class FirstStartDB {
         item3Images.add(item3image1);
 
         Item item3 = Item.builder()
-                .basePrice(BigDecimal.valueOf(30L))
+                .basePrice(30L)
                 .count(30)
                 .description("Сидр, как пиво, но лучше")
                 .discount(15)
@@ -283,7 +283,7 @@ public class FirstStartDB {
                 .isModerated(true)
                 .isPretendedToBeDeleted(false)
                 .name("Сидрoff")
-                .price(BigDecimal.valueOf(100L))
+                .price(100L)
                 .rating(9.5)
 //                .cartItem(cartItem1)
                 .category(category3)
@@ -408,7 +408,7 @@ public class FirstStartDB {
         item2Images.add(item2image1);
 
         Item item2 = Item.builder()
-                .basePrice(BigDecimal.valueOf(30L))
+                .basePrice(30L)
                 .count(2)
                 .description("Язь, здоровенный, обалденный, ЯЗЬ!")
                 .discount(15)
@@ -416,7 +416,7 @@ public class FirstStartDB {
                 .isModerated(true)
                 .isPretendedToBeDeleted(false)
                 .name("Язь Суздальский")
-                .price(BigDecimal.valueOf(100))
+                .price(100L)
                 .rating(7.5)
 //                .cartItem(cartItem2)
                 .category(category2)
@@ -446,7 +446,7 @@ public class FirstStartDB {
         item4Images.add(item4image1);
 
         Item item4 = Item.builder()
-                .basePrice(BigDecimal.valueOf(30L))
+                .basePrice(30L)
                 .count(2)
                 .description("Буль-буль кальмарики")
                 .discount(15)
@@ -454,7 +454,7 @@ public class FirstStartDB {
                 .isModerated(true)
                 .isPretendedToBeDeleted(false)
                 .name("Кальмары сушеные")
-                .price(BigDecimal.valueOf(100L))
+                .price(100L)
                 .rating(8.5)
 //                .cartItem(cartItem4)
                 .category(category4)
@@ -751,10 +751,10 @@ public class FirstStartDB {
 //        firstStartDBDao.persist(user3Info);
         firstStartDBDao.persist(favoriteUser3);
 
-        firstStartDBDao.persist(cartItem1);
-        firstStartDBDao.persist(cartItem3);
-        firstStartDBDao.persist(cartItem2);
-        firstStartDBDao.persist(cartItem4);
+//        firstStartDBDao.persist(cartItem1);
+//        firstStartDBDao.persist(cartItem3);
+//        firstStartDBDao.persist(cartItem2);
+//        firstStartDBDao.persist(cartItem4);
 
 
         firstStartDBDao.persist(order);

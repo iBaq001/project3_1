@@ -9,19 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
@@ -48,7 +36,7 @@ public class Order {
     private Calendar expectedDeliveryDate;//ожидаемая дата доставки
 
     @Column(name = "total")
-    private BigDecimal grandTotal;
+    private BigDecimal total;
 
     @Column(name = "currency")
     private String currency;
@@ -64,8 +52,6 @@ public class Order {
     @ToString.Exclude
     private User user;
 
-    @Column(name = "qiwi_Id")
-    private String qiwiId;
 
     @ManyToMany
     @JoinTable(name = "order_item",

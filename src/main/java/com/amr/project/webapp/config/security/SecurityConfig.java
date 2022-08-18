@@ -22,7 +22,7 @@ import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -73,6 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").hasAnyAuthority("USER","ADMIN")
                 .antMatchers("/feedback_service/**").authenticated()
                 .antMatchers("/signup", "/confirm", "/code", "/confirm-account").permitAll()
+                .antMatchers("/api/order/**").hasAnyAuthority("ADMIN","MODERATOR")
 
                 .anyRequest()
 //                .authenticated()

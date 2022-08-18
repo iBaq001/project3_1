@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CategoryService extends ReadWriteService<Category,Long> {
     List<CategoryDto> findAllCategoriesByShopId(Long shopId);
+
 }

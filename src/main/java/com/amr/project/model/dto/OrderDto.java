@@ -1,5 +1,6 @@
 package com.amr.project.model.dto;
 
+import com.amr.project.model.entity.Address;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
@@ -19,9 +20,9 @@ import java.util.List;
         property = "id", scope = Long.class)
 public class OrderDto {
     private Long id;
-    private LocalDateTime date;
+//    private AddressDto address;
+//    private LocalDateTime date; - зачем оно в дто? предлагаю удалить
     private BigDecimal total;
-    private AddressDto address;
     private Long userId;
-    private List<Long> itemIds;
+    private List<ItemDto> itemsInOrder;
 }

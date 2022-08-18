@@ -3,11 +3,10 @@ package com.amr.project.util;
 import com.amr.project.converter.ImagesToByteArrayConverter;
 import com.amr.project.dao.impl.FirstStartDBDao;
 import com.amr.project.model.entity.*;
-import com.amr.project.model.entity.report.SalesHistory;
 import com.amr.project.model.enums.Gender;
+import com.amr.project.model.enums.Status;
 import com.amr.project.model.enums.PersonalDataStatus;
 import com.amr.project.model.enums.Roles;
-import com.amr.project.model.enums.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -684,6 +683,7 @@ public class FirstStartDB {
         Order order = Order.builder()
                 .orderDate(Calendar.getInstance())
                 .itemsInOrder(items)
+                .total(new BigDecimal(390))
                 .address(address1)
                 .expectedDeliveryDate(date)
                 .user(user3)
@@ -693,6 +693,7 @@ public class FirstStartDB {
         Order order2 = Order.builder()
                 .orderDate(date2)
                 .itemsInOrder(items2)
+                .total(new BigDecimal(1))
                 .address(address3)
                 .expectedDeliveryDate(date)
                 .user(user2)

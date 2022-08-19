@@ -94,7 +94,7 @@ public class ItemController {
                                   Model model,
                                   @ModelAttribute("review") ReviewDto review) {
             //Через ДТО не работает из-за маппера юзера
-          User user = userService.findByUsername(principal.getName());
+          User user = userService.findByUserName(principal.getName());
         review.setId(null);
         review.setItemId(id);
         review.setShopId(itemService.getItemById(id).getShop().getId());

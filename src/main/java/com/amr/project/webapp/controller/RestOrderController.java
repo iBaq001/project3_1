@@ -35,7 +35,7 @@ public class RestOrderController {
 
     @GetMapping
     public ResponseEntity<List<OrderDto>> getOrderOfCurrentUser (Principal principal) {
-        User user = userService.findByUsername(principal.getName());
+        User user = userService.findByUserName(principal.getName());
         return new ResponseEntity<>(orderMapper.toListOrderDto(user.getOrders()), HttpStatus.FOUND);
     }
 

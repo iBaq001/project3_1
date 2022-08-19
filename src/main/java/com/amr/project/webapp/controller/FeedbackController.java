@@ -34,7 +34,7 @@ public class FeedbackController {
 
     @PostMapping
     public String addFeedback(@ModelAttribute("feedback") Feedback feedback, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
+        User user = userService.findByUserName(principal.getName());
         feedback.setUsername(principal.getName());
         feedback.setUser(user);
         feedbackService.persist(feedback);

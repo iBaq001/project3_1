@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
         userDao.persist(user);
     }
 
+    @Transactional
     @Override
     public void update(User user) {
         userDao.update(user);
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
         return userDao.findUserByUsername(name);
     }
 
-
+    @Override
     public User findUserByEmail(String email) {
         return userDao.findUserByEmail(email);
     }
@@ -52,5 +53,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Long id) {
         userDao.deleteByIdCascadeIgnore(id);
+    }
+
+    @Transactional
+    @Override
+    public void deleteByIdEnable(Long id) {
+        userDao.deleteByIdCascadeEnable(id);
     }
 }

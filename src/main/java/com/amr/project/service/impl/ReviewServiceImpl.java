@@ -47,7 +47,7 @@ public class ReviewServiceImpl extends ReadWriteServiceImpl<Review, Long> implem
     @Override
     public void addReviewDto(ReviewDto reviewDto) {
         Review review =  reviewMapper.reviewDtoToReview(reviewDto);
-        User user = userService.findByUsername(reviewDto.getUserName());
+        User user = userService.findByUserName(reviewDto.getUserName());
         review.setUser(user);
         reviewDao.persist(review);
 

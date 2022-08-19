@@ -1,13 +1,16 @@
 package com.amr.project.webapp.controller;
 
 import com.amr.project.mapper.UserMapper;
+import com.amr.project.model.dto.CartItemDto;
 import com.amr.project.model.dto.UserDto;
 import com.amr.project.model.entity.User;
+import com.amr.project.model.enums.Roles;
 import com.amr.project.service.abstracts.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +21,7 @@ import java.util.Optional;
 public class RestUserController {
     private final UserService userService;
     private final UserMapper userMapper;
+
 
     @GetMapping
     public ResponseEntity<List<UserDto>> findAll() {
@@ -43,6 +47,9 @@ public class RestUserController {
         userService.update(user);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userDto);
     }
+
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<UserDto> delete(@PathVariable Long id) {

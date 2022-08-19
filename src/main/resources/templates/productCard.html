@@ -16,6 +16,7 @@
                     th:data-item-id="${itemId}" data-quantity="1" type = "submit">В корзину
             </button>
             </form>
+            <a th:href="@{/items/{id}(id=${item.getId()})}"> Информация о товаре</a>
             <div class="heart-container"  th:if="${isFavorite != null}">
                 <i class="fa-heart js-heart heart fa-2x" th:data-item-id="${itemId}" th:classappend="${ isFavorite >= 0 ? 'fas' : 'far'}" id="item-heart"></i>
 

@@ -22,15 +22,25 @@
 <p >Почему это нужно купить: </p>
 <p style="text-indent: 25px;"  class="navbar-brand"  th:text="${item.getDescription()}" >Desc</p>
 <p>Скорее оформляй заказ!Жми на кнопку: </p>
-<button class="btn btn-primary btn-add-to-cart"
-        th:data-item-id="${item.getId()}" data-quantity="1">В корзину</button>
-<form th:method="DELETE" th:action="@{/items/{id}(id=${item.getId()})}">
-<button type="submit" class="btn btn-danger btn btn-primary">Delete</button>
+<form th:method = "POST" th:action="@{/cart/addItem/{id}(id = ${item.getId()})}" th:object = "${item}">
+    <button class="btn btn-primary btn-add-to-cart"
+            th:data-item-id="${itemId}" data-quantity="1" type = "submit">В корзину
+    </button>
 </form>
+<!--<form th:method="DELETE" th:action="@{/items/{id}(id=${item.getId()})}">-->
+<!--<button type="submit" class="btn btn-danger btn btn-primary">Delete</button>-->
+<!--</form>-->
 <a th:href="@{/items/{id}/edit(id=${item.getId()})}">Edit</a>
 <br>
 
 <!--_____________________________________________________________-->
+<li class="nav-item" sec:authorize = "!isAuthenticated()">
+<a>Чтобы оставить свой отзыв о товаре </a>
+<a href="/login">ВОЙДИТЕ</a>
+<a>или</a>
+<a href="/signup">ЗАРЕГИСТРИРУЙТЕСЬ</a>
+</li>
+<li class="nav-item" sec:authorize = "isAuthenticated()">
 <p>Оставить свой отзыв: </p>
 <form action="#" th:action="@{/items/{id}(id = ${item.getId()})}" th:object="${review}" method="post">
     <table>
@@ -52,7 +62,7 @@
         </tr>
     </table>
 </form>
-
+</li>
 <!--___________________________________________________________________________-->
 <p>Отзывы: </p>
 <th:block th:each="review : ${reviews}">

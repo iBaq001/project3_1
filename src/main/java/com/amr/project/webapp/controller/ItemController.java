@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -45,10 +46,9 @@ public class ItemController {
     public String show(@PathVariable("id") Long id, Model model, @ModelAttribute("review") ReviewDto review) {
         Item item = itemService.getItemById(id);
         model.addAttribute("item", ItemToItemForShowcaseDtoConverter.convertItemToItemForShowcaseDto(item));
-        List<Review> list = reviewService.findReviewsByItem(item);
-//                .stream()
-//                .filter(Review::isModerated).collect(Collectors.toList());
-
+        List<Review> list = reviewService.findReviewsByItem(item)
+                .stream()
+                .filter(Review::isModerated).collect(Collectors.toList());
         model.addAttribute("reviews", list);
         return "itemInfo";
     }
@@ -93,21 +93,14 @@ public class ItemController {
                                   Principal principal,
                                   Model model,
                                   @ModelAttribute("review") ReviewDto review) {
-            //Через ДТО не работает из-за маппера юзера
           User user = userService.findByUserName(principal.getName());
         review.setId(null);
         review.setItemId(id);
+        review.setDate(LocalDate.now());
         review.setShopId(itemService.getItemById(id).getShop().getId());
         review.setUserName(user.getUsername());
 
         reviewService.addReviewDto(review);
-
-//            review.setId(null);
-//            review.setUser(user);
-//            review.setItem(itemService.getItemById(id));
-//            review.setDate(new Date());
-//            review.setShop(itemService.getItemById(id).getShop());
-//            reviewService.persist(review);
         return "redirect:/items/" + id;
     }
 

@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-
 public class CartItemController {
 
     private CartItemService cartItemService;
@@ -77,13 +76,6 @@ public class CartItemController {
         modelAndView.addObject("sum", sum);
         return modelAndView;
     }
-
-//    @PutMapping("/cart/editQuantity")
-//    public void editQuantityInTheCart(@RequestBody List<CartItemDto> cartItemDtoList) {
-//
-//        cartItemService.updateQuantityInCart(cartItemDtoList);
-//
-//    }
 
     @PatchMapping("/cart/editQuantity")
     public ModelAndView editQuantityInTheCart(@ModelAttribute("item") CartItemDto item, @RequestParam Long id, ModelAndView modelAndView) {

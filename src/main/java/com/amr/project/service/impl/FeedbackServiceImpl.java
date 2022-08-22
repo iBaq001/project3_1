@@ -53,7 +53,7 @@ public class FeedbackServiceImpl extends ReadWriteServiceImpl<Feedback, Long> im
 
     @Override
     public void updateFeedback(Long id, FeedbackDto feedbackDto) {
-            feedbackMapper.feedbackToFeedbackDto(feedbackDao.findById(id));
+        feedbackDao.update(feedbackMapper.feedbackDtoToFeedback(feedbackDto));
     }
 
     @Override

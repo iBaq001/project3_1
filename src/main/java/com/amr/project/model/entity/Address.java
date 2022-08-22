@@ -44,11 +44,9 @@ public class Address {
     @Column(name = "house", nullable = false, unique = true)
     private String house;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @ToString.Exclude
     private City city;
-
 
     @OneToMany(
             mappedBy = "address",
@@ -61,7 +59,6 @@ public class Address {
     @ToString.Exclude
     private List<User> users;
 
-
     @OneToMany(
             mappedBy = "address",
             cascade = {CascadeType.MERGE,
@@ -72,7 +69,6 @@ public class Address {
     )
     @ToString.Exclude
     private List<Shop> shops;
-
 
     @OneToMany(cascade = {CascadeType.MERGE,
             CascadeType.PERSIST,

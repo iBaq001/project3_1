@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,13 +43,21 @@ public class ItemController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public String itemList(Model model) {
+        User user = (User) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        model.addAttribute("items", itemService.getAll());
+        model.addAttribute("user", userService.findByUserName(user.getUsername()));
+        return "admin_items";
+    }
     @GetMapping("/{id}")
     public String show(@PathVariable("id") Long id, Model model, @ModelAttribute("review") ReviewDto review) {
         Item item = itemService.getItemById(id);
         model.addAttribute("item", ItemToItemForShowcaseDtoConverter.convertItemToItemForShowcaseDto(item));
-        List<Review> list = reviewService.findReviewsByItem(item)
-                .stream()
-                .filter(Review::isModerated).collect(Collectors.toList());
+        List<Review> list = reviewService.findReviewsByItem(item);
+//                .stream()
+//                .filter(Review::isModerated).collect(Collectors.toList());
         model.addAttribute("reviews", list);
         return "itemInfo";
     }
@@ -93,13 +102,13 @@ public class ItemController {
                                   Principal principal,
                                   Model model,
                                   @ModelAttribute("review") ReviewDto review) {
-          User user = userService.findByUserName(principal.getName());
+            //Через ДТО не работает из-за маппера юзера
+        User user = userService.findByUserName(principal.getName());
         review.setId(null);
         review.setItemId(id);
         review.setDate(LocalDate.now());
         review.setShopId(itemService.getItemById(id).getShop().getId());
         review.setUserName(user.getUsername());
-
         reviewService.addReviewDto(review);
         return "redirect:/items/" + id;
     }

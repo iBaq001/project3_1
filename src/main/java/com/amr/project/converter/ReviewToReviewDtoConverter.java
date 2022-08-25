@@ -24,7 +24,7 @@ public class ReviewToReviewDtoConverter {
                 (review.getUser() == null) ? null : review.getUser().getId(),
                 (review.getUser() == null) ? null : review.getUser().getUsername(),
                 (review.getShop() == null) ? null : review.getShop().getId(),
-                review.isModerated()
+                review.isModerated(), review.isModerateAccept(), review.getModeratedRejectReason()
         );
     }
 }

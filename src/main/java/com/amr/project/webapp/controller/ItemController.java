@@ -15,6 +15,8 @@ import com.amr.project.service.abstracts.UserService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/items")
@@ -43,7 +46,20 @@ public class ItemController {
         this.userService = userService;
     }
 
+
     @GetMapping
+    public String getItems(
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "1") int size,
+            Model model) {
+        Page<ItemForShowcaseDto> pages = itemService.findAll(PageRequest.of(page, size));
+        model.addAttribute("page", pages);
+        model.addAttribute("numbers", IntStream.range(0,pages.getTotalPages()).toArray());
+        model.addAttribute("items", pages.getContent());
+        return "items";
+    }
+
+    @GetMapping("/admin")
     public String itemList(Model model) {
         User user = (User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();

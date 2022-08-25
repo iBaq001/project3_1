@@ -28,4 +28,6 @@ public interface ShowcaseService {
     void removeShopById(Long id);
 
     void updateShop(Long id, ShopDto shopDto);
+
+    void updateShopDto(ShopDto shopDto);
 }

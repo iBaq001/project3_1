@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Товары</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Wild Beers</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">button</span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Сервисы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Вакансии</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Категории
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Электроника</a></li>
+                        <li><a class="dropdown-item" href="#">Для дома и дачи</a></li>
+                        <li><a class="dropdown-item" href="#">Хобби и отдых</a></li>
+                        <li><a class="dropdown-item" href="#">Животные</a></li>
+                        <li><a class="dropdown-item" href="#">Авто</a></li>
+                        <li><a class="dropdown-item" href="#">Запчасти и аксессуары</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+
+            <form class="d-flex" role="search" method="get" action="/search/item">
+                <input class="form-control me-2" type="search" name="name" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Поиск</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+
+<div class="table-responsive col-8">
+    <table class="table table-striped table-hover">
+        <thead>
+        <h3 align="center">Товары</h3>
+            <tr>
+                <th>Наименование товара</th>
+                <th>Описание</th>
+                <th>Цена</th>
+                <th>Одобрить</th>
+                <th>Отклонить</th>
+            </tr>
+        </thead>
+        <tbody th:each="itemDto: ${items}">
+
+        <tr>
+            <td th:text="${itemDto.getName()}">Id</td>
+            <td th:text="${itemDto.getDescription()}">Id</td>
+            <td th:text="${itemDto.getPrice()}">Id</td>
+            <td>
+                <form th:action="@{/api/moderator/items/accept/{id}(id = ${itemDto.getId()})}" th:method="put">
+                    <button type="submit" class="btn btn-primary">Одобрить</button>
+                </form>
+            </td>
+            <td>
+
+                <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject">
+                    Отклонить</a>
+
+            </td>
+
+            <!-- Modal Reject reason-->
+            <div class="modal fade" id="reject" tabindex="-1" aria-labelledby="rejectLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form th:action="@{/api/moderator/items/reject/{id}(id = ${itemDto.getId()})}"
+                              th:object="${itemDto}" th:method="patch">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="rejectLabel">Причина отказа</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <strong><label for="reason">Введите причину</label></strong>
+                                <input type="text" class="form-control"
+                                       th:value="${itemDto.moderatedRejectReason}"
+                                       id="reason"
+                                       name="reason">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

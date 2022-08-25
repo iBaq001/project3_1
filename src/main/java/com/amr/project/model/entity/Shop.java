@@ -75,8 +75,8 @@ public class Shop implements Serializable {
             cascade = {CascadeType.MERGE,
                     CascadeType.PERSIST,
                     CascadeType.REFRESH,
-                    CascadeType.DETACH},
-            orphanRemoval = true
+                    CascadeType.DETACH}
+
     )
     @ToString.Exclude
     private List<Review> reviews;
@@ -100,8 +100,7 @@ public class Shop implements Serializable {
 
     @OneToMany(
             mappedBy = "shop",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.ALL
     )
     @ToString.Exclude
     private List<Feedback> feedbacks;
@@ -112,8 +111,7 @@ public class Shop implements Serializable {
             cascade = {CascadeType.PERSIST,
                     CascadeType.MERGE,
                     CascadeType.REFRESH,
-                    CascadeType.DETACH},
-            orphanRemoval = true)
+                    CascadeType.DETACH})
     @ToString.Exclude
     private List<Discount> discounts;
 
@@ -129,8 +127,7 @@ public class Shop implements Serializable {
 
 
     @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.ALL
     )
     @JoinColumn(name = "shop_id")
     @ToString.Exclude

@@ -32,6 +32,8 @@ public class ShopToShopDtoConverter {
                 (shop.getCoupons() == null) ? null : shop.getCoupons().stream()
                         .map(coupon -> coupon.getId())
                         .collect(Collectors.toList()),
-                shop.isModerated());
+                shop.isModerated(),
+                shop.isModerateAccept(),
+                shop.getModeratedRejectReason());
     }
 }

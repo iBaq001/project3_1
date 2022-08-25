@@ -104,4 +104,9 @@ public class ShowcaseServiceImpl implements ShowcaseService {
             throw new ResourceNotFoundException(String.format("Resource with id: %d", id));
         }
     }
+
+    @Override
+    public void updateShopDto(ShopDto shopDto) {
+        shopDao.update(shopMapper.shopDtoToShop(shopDto));
+    }
 }

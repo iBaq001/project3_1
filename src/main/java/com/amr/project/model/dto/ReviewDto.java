@@ -30,4 +30,6 @@ public class ReviewDto {
     private String userName;
     private Long shopId;
     private boolean isModerated;
+    private boolean isModeratedAccept;
+    private String moderatedRejectReason;
 }

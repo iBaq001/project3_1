@@ -29,4 +29,6 @@ public class ShopDto {
     private Long userId;
     private List<Long> couponIds;
     private boolean isModerated;
+    private boolean isModeratedAccept;
+    private String moderatedRejectReason;
 }

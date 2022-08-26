@@ -38,6 +38,7 @@ public class ShopServiceImpl extends ReadWriteServiceImpl<Shop, Long> implements
                 .map(shopMapper::shopToShopDto)
                 .collect(Collectors.toList());
     }
+    
     @Override
     public ShopDto getShopDtoById(Long shopId) {
         return shopMapper.shopToShopDto(shopDao.findById(shopId));
@@ -50,6 +51,28 @@ public class ShopServiceImpl extends ReadWriteServiceImpl<Shop, Long> implements
     }
 
     @Override
+
+    public List<Shop> findAll(){
+        return shopDao.findAll();
+
+    }
+
+    @Transactional
+    @Override
+    public void deleteById(Long id){
+        shopDao.deleteByIdCascadeIgnore(id);
+
+    }
+
+    // @Override 
+    // public void persist(Shop shop){
+    //     shopDao.persist(shop);
+
+    // }
+
+
+
+
     public Page<ShopDto> findAll(Pageable pageable) {
         List<ShopDto> list = shopRepo.findAll(pageable)
                 .getContent().stream().map(shopMapper::shopToShopDto)
@@ -58,5 +81,6 @@ public class ShopServiceImpl extends ReadWriteServiceImpl<Shop, Long> implements
 
         return page;
     }
+
 
 }

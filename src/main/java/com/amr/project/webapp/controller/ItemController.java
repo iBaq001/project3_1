@@ -15,6 +15,7 @@ import com.amr.project.service.abstracts.UserService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,6 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -59,7 +61,7 @@ public class ItemController {
         return "items";
     }
 
-    @GetMapping("/admin")
+    @GetMapping("admin/items")
     public String itemList(Model model) {
         User user = (User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
@@ -67,6 +69,7 @@ public class ItemController {
         model.addAttribute("user", userService.findByUserName(user.getUsername()));
         return "admin_items";
     }
+
     @GetMapping("/{id}")
     public String show(@PathVariable("id") Long id, Model model, @ModelAttribute("review") ReviewDto review) {
         Item item = itemService.getItemById(id);
@@ -79,38 +82,36 @@ public class ItemController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteItem(@PathVariable("id") long id, @AuthenticationPrincipal User user) {
-        try {
-            if (user.getRole() == Roles.ADMIN || user.getRole() == Roles.MODERATOR) {
-                itemService.deleteItem(id);
-            }
-        } catch (NullPointerException e) {
-            return "Ошибка доступа";
-        } finally {
-            return "redirect:/";
-        }
+    public ModelAndView deleteItem(@PathVariable("id") Long id, ModelAndView modelAndView) {
+        itemService.deleteItem(id);
+        modelAndView.setViewName("redirect:/items");
+        return modelAndView;
     }
+
     @GetMapping("/{id}/edit")
     public String editItem(Model model, @PathVariable("id") long id) {
         Item editItem = itemService.getItemById(id);
         model.addAttribute("item", editItem);
         return "editItem";
     }
-    @PatchMapping("{id}")
+
+    @PatchMapping("/{id}")
     public String updateItem(ItemDtoRequest itemDtoRequest,
                              @PathVariable("id") Long id) {
         itemService.updateItem(id, itemDtoRequest);
-        return "redirect:/";
+        return "redirect:/items";
     }
+
     @GetMapping("/newItem")
     public String newItem(Model model) {
         model.addAttribute("item", new Item());
         return "newItem";
     }
+
     @PostMapping
-    public String createItem(ItemDtoRequest itemDtoRequest) {
+    public String createItem(ItemDtoRequest itemDtoRequest, @ModelAttribute("item") Item item) {
         itemService.addItem(itemDtoRequest);
-        return "redirect:/";
+        return "redirect:/items";
     }
 
     @PostMapping("/{id}")

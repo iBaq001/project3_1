@@ -13,6 +13,7 @@ public interface CityService extends ReadWriteService<City, Long>{
 
     void persist(CityDto cityDto);
 
+    CityDto findByCityName(String cityName);
     void updateCity(Long id, CityDto cityDto);
 
     void deleteCity(Long id);

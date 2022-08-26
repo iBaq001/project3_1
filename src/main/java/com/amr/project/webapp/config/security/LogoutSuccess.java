@@ -20,6 +20,7 @@ public class LogoutSuccess implements LogoutSuccessHandler {
     public LogoutSuccess(CartItemService cartItemService, UserService userService) {
         this.cartItemService = cartItemService;
         this.userService = userService;
+
     }
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest,

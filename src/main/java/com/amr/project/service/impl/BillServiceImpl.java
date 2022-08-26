@@ -29,8 +29,7 @@ public class BillServiceImpl implements BillService {
 
 
 
-    @Value("${qiwi.secretKey}")
-    private String SECRET_KEY;
+    private final String SECRET_KEY = "eyJ2ZXJzaW9uIjoiUDJQIiwiZGF0YSI6eyJwYXlpbl9tZXJjaGFudF9zaXRlX3VpZCI6Ijc1dnA3OC0wMCIsInVzZXJfaWQiOiI3OTIxODQ2MDA4NiIsInNlY3JldCI6ImRhNDNmMThkOWUwMTAzOGU5MWZhNjBjZGZkNzdhY2E3MTM0MTcwNDVlNTU0ZjlhZmMyNGQ5MWQ2MmUzMjNkMDgifX0=";
 
     @Autowired
     private UserService userService;

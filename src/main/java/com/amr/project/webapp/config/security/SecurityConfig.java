@@ -61,6 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         authProvider.setPasswordEncoder(passwordEncoder());
 //        authProvider.setPostAuthenticationChecks(differentLocationChecker);
         return authProvider;
+
     }
 
     @Override
@@ -70,7 +71,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/user/**").hasAnyAuthority("USER","ADMIN")
                 .antMatchers("/feedback_service/**").authenticated()
                 .antMatchers("/signup", "/confirm", "/code", "/confirm-account").permitAll()
                 .antMatchers("/api/order/**").hasAnyAuthority("ADMIN","MODERATOR")

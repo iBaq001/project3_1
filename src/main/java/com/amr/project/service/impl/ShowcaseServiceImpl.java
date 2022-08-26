@@ -80,33 +80,39 @@ public class ShowcaseServiceImpl implements ShowcaseService {
         return ShopToShopDtoConverter.convertShopToShopDto(shopDao.findShopByName(name));
     }
 
+    @Transactional
     @Override
     public void removeShopById(Long id) {
         Shop deletingShop = shopDao.findById(id);
         if(Objects.nonNull(deletingShop)) {
-            shopDao.delete(findById(id));
+            shopDao.deleteByIdCascadeIgnore(id);
         } else {
             throw new ResourceNotFoundException(String.format("Resource with id: %d", id));
         }
+
     }
 
     @Override
     public void updateShop(Long id, ShopDto shopDto) {
         Shop updatingShop = shopDao.findById(id);
+        shopDao.update(updatingShop);
 
-        if (Objects.nonNull(updatingShop)) {
-            updatingShop.setName(shopDto.getName());
-            updatingShop.setDescription(shopDto.getDescription());
-            updatingShop.setEmail(shopDto.getEmail());
-            updatingShop.setPhone(shopDto.getPhone());
-            shopDao.persist(updatingShop);
-        } else {
-            throw new ResourceNotFoundException(String.format("Resource with id: %d", id));
-        }
+        // TODO Оставить для эксперементов
+        // if (Objects.nonNull(updatingShop)) {
+        //     updatingShop.setName(shopDto.getName());
+        //     updatingShop.setDescription(shopDto.getDescription());
+        //     updatingShop.setEmail(shopDto.getEmail());
+        //     updatingShop.setPhone(shopDto.getPhone());
+        //     shopDao.persist(updatingShop);
+        // } else {
+        //     throw new ResourceNotFoundException(String.format("Resource with id: %d", id));
+        // }
     }
+
 
     @Override
     public void updateShopDto(ShopDto shopDto) {
         shopDao.update(shopMapper.shopDtoToShop(shopDto));
     }
+
 }

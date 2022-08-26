@@ -13,5 +13,19 @@ public interface ShopService extends ReadWriteService<Shop, Long> {
     Shop getShopById(Long shopId);
     ShopDto getShopDtoById(Long shopId);
 
+
+    List<Shop> findAll();
+
+    Shop findById(Long id);
+
+    void deleteById(Long id);
+
+    // void persist(Shop shop);
+
+    void update(Shop shop);
+
+    // void deleteByIdEnable(Long id);
+
     Page<ShopDto> findAll(Pageable pageable);
+
 }

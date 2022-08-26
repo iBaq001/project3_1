@@ -86,4 +86,28 @@ public class UserController {
         model.addAttribute("user", userDetailsService.findUserByUsername(user.getUsername()));
         return "/user";
     }
+
+
+    @PatchMapping("user/edit/{id}")
+    public ModelAndView userUpdate(@PathVariable Long id,
+                               ModelAndView modelAndView,
+                               @ModelAttribute("user") User user,
+                               @RequestParam("password") String password,
+                               @RequestParam("phone") String phone,
+                                   @RequestParam("email") String email,
+                               @RequestParam("firstName") String firstName,
+                               @RequestParam("lastName") String lastName,
+                                   @RequestParam("age") int age) {
+        User user2 =  userService.findById(id);
+        user2.setPhone(phone);
+        user2.setEmail(email);
+        user2.setLastName(lastName);
+        user2.setFirstName(firstName);
+        user2.setPassword(password);
+        user2.setAge(age);
+        userService.update(user2);
+        modelAndView.setViewName("redirect:/user");
+        return modelAndView;
+    }
+
 }
